@@ -1,0 +1,13 @@
+node_modules
+.npmrc
+.idea
+yarn.lock
+test
+test-kit
+karma.conf.js
+webpack.config.js
+tsconfig.json
+.travis.yml
+appveyor.yml
+.editorconfig
+.gitignore
