@@ -1,10 +1,8 @@
-export type SelectionResult = Element | null;
+export function selectDom<T extends Element>(container: T, attrName: string = 'data-automation-id'): (...selectors: string[]) => T | null {
 
-export function selectDom(container: Element, attrName: string = 'data-automation-id'): (...selectors: string[]) => SelectionResult {
-
-    function select(parentElement: Element, ...selectors: string[]): SelectionResult {
+    function select(parentElement: T, ...selectors: string[]): T | null {
         const [selector, ...rest] = selectors;
-        const elementList = parentElement.querySelectorAll(`[${attrName}~="${selector}"]`);
+        const elementList = parentElement.querySelectorAll(`[${attrName}~="${selector}"]`) as NodeListOf<T>;
         if(elementList.length === 0) {
             return null;
         } else if(elementList.length === 1) {
@@ -19,7 +17,7 @@ export function selectDom(container: Element, attrName: string = 'data-automatio
         }
     }
 
-    return function (...selectors: string[]): SelectionResult {
+    return function (...selectors: string[]): T | null {
         return select(container, ...selectors);
     }
 }
