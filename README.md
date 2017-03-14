@@ -168,3 +168,4 @@ Example:
 ```javascript
 expect([button1, button2, button3]).to.be.inHorizontalSequence(10.0);
 ```
+
