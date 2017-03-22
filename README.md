@@ -100,7 +100,7 @@ the right **combination** of layout matchers, one should be able describe most o
 
 The parts are passed as references to `HTMLElement`.
 
-[Tests of layout matchers](../test/layout.spec.ts) should provide exhaustive examples on how to use the matchers.
+[Tests of layout matchers](test/layout.spec.ts) should provide exhaustive examples on how to use the matchers.
 
 ### Placement
 
