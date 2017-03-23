@@ -65,6 +65,19 @@ describe('selectDom', function () {
         expect(textContent(select('level1', 'level2'))).to.equal('It is here.');
     });
 
+    it('selects nested components (two ids on the same element)', function () {
+        const select = selectDom(container);
+        container.innerHTML = `
+            <div>
+                <div data-automation-id="level1">
+                    <p data-automation-id="other-id">Not here.</p>
+                    <p data-automation-id="level2 level3">It is here.</p>
+                </div>
+
+            </div>`;
+        expect(textContent(select('level1', 'level2', 'level3'))).to.equal('It is here.');
+    });
+
     it('fails when encountering ambiguity in nested paths (1)', function () {
         const select = selectDom(container);
         container.innerHTML = `

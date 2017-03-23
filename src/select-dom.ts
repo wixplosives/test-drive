@@ -2,8 +2,12 @@ export function selectDom(container: Element, attrName: string = 'data-automatio
 
     function select<T extends Element>(parentElement: Element, ...selectors: string[]): T | null {
         const [selector, ...rest] = selectors;
-        const elementList = parentElement.querySelectorAll(`[${attrName}~="${selector}"]`);
-        if (elementList.length === 0) {
+        const selectorExpr = `[${attrName}~="${selector}"]`;
+        const elementList: T[] = Array.prototype.slice.call(parentElement.querySelectorAll(selectorExpr));
+        if(parentElement.matches(selectorExpr)) {
+            elementList.unshift(parentElement as T);
+        }
+        if(elementList.length === 0) {
             return null;
         } else if (elementList.length === 1) {
             const element = elementList[0];
