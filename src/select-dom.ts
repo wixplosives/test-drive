@@ -1,23 +1,27 @@
-export function selectDom(container: Element, attrName: string = 'data-automation-id') {
+export function selectDom<T extends Element>(container: T, attrName: string = 'data-automation-id'): (...selectors: string[]) => T | null {
 
-    function select<T extends Element>(parentElement: Element, ...selectors: string[]): T | null {
+    function select(parentElement: T, ...selectors: string[]): T | null {
         const [selector, ...rest] = selectors;
-        const elementList = parentElement.querySelectorAll(`[${attrName}~="${selector}"]`);
-        if (elementList.length === 0) {
+        const selectorExpr = `[${attrName}~="${selector}"]`;
+        const elementList: T[] = Array.prototype.slice.call(parentElement.querySelectorAll(selectorExpr));
+        if(parentElement.matches(selectorExpr)) {
+            elementList.unshift(parentElement);
+        }
+        if(elementList.length === 0) {
             return null;
-        } else if (elementList.length === 1) {
+        } else if(elementList.length === 1) {
             const element = elementList[0];
-            if (rest.length > 0) {
-                return select<T>(element, ...rest);
+            if(rest.length>0) {
+                return select(element, ...rest);
             } else {
-                return element as T;
+                return element;
             }
         } else {
             throw new Error(`Selector "${selector}" ambiguous (${elementList.length} matches)`);
         }
     }
 
-    return function <T extends Element>(...selectors: string[]) {
-        return select<T>(container, ...selectors);
+    return function (...selectors: string[]): T | null {
+        return select(container, ...selectors);
     }
 }
