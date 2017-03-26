@@ -88,7 +88,7 @@ function getEdgeAccessors(direction: Direction): [EdgeAccessor, EdgeAccessor] {
 }
 
 
-function findLastElementOfSequence(elements: Element[], direction: Direction, tolerance: number, distance: number): number {
+function findLastElementOfSequence(elements: Element[], direction: Direction, tolerance: number = 1, distance: number = 0): number {
     const [farEdge, nearEdge] = getEdgeAccessors(direction);
     const boundList = elements.map(getBoundaries);
     for(let i=0; i<boundList.length-1; i++) {
@@ -200,11 +200,11 @@ export default function use(chai: any, util: any) {
         );
     }
 
-    chai.Assertion.addMethod('inHorizontalSequence', function (options: Options = { tolerance: 1.0, distance: undefined }) {
+    chai.Assertion.addMethod('inHorizontalSequence', function (options: Options = {}) {
         assertSequence.call(this, options.tolerance, options.distance, "horizontal");
     });
 
-    chai.Assertion.addMethod('inVerticalSequence', function (options: Options = { tolerance: 1.0, distance: undefined }) {
+    chai.Assertion.addMethod('inVerticalSequence', function (options: Options = {}) {
         assertSequence.call(this, options.tolerance, options.distance, "vertical");
     });
 
