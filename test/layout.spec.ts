@@ -300,7 +300,7 @@ describe('Layout matchers', function () {
     });
 
     describe('Detect sequence of elements', function () {
-        it('horizontally, and when a distance between elements is given', function () {
+        it('horizontally', function () {
             const {a, b, c, d} = getLayoutFixture(`
                   b--b                d----d
             a----a|  |                |    |
@@ -324,7 +324,7 @@ describe('Layout matchers', function () {
             expect(() => expect([]).to.be.inHorizontalSequence()).to.throw('Expected elements to form horizontal sequence, but element list was empty');
         });
 
-        it('vertically, and when a distance between elements is given', function () {
+        it('vertically', function () {
             const {a, b, c, d} = getLayoutFixture(`
             
                      a-------a

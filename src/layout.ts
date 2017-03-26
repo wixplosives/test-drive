@@ -93,12 +93,8 @@ function findLastElementOfSequence(elements: Element[], direction: Direction, to
     const boundList = elements.map(getBoundaries);
     for(let i=0; i<boundList.length-1; i++) {
         const distanceBetweenElements = nearEdge(boundList[i+1]) - farEdge(boundList[i]);
-        if (distance && !tolerance && distanceBetweenElements !== distance) {
+        if (Math.abs(distanceBetweenElements - distance) > tolerance) {
             return i + 1;
-        } else if (distance && Math.abs(distanceBetweenElements - distance) > tolerance) {
-            return i + 1;
-        } else if(!distance && distanceBetweenElements > tolerance) {
-            return i+1;
         }
     }
     return elements.length;
