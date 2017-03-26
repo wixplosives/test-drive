@@ -95,7 +95,7 @@ function findLastElementOfSequence(elements: Element[], direction: Direction, to
         const distanceBetweenElements = nearEdge(boundList[i+1]) - farEdge(boundList[i]);
         if (distance && !tolerance && distanceBetweenElements !== distance) {
             return i + 1;
-        } else if (distance && distanceBetweenElements > distance + tolerance) {
+        } else if (distance && Math.abs(distanceBetweenElements - distance) > tolerance) {
             return i + 1;
         } else if(!distance && distanceBetweenElements > tolerance) {
             return i+1;
