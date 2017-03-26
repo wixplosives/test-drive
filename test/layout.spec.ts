@@ -351,7 +351,7 @@ describe('Layout matchers', function () {
             expect(() => expect([]).to.be.inVerticalSequence()).to.throw('Expected elements to form vertical sequence, but element list was empty');
         });
 
-        it('with specified distance between', function () {
+        it('with specified distance between horizontal elements', function () {
             const {a, b, c, d} = getLayoutFixture(`
                    b--b                 d----d
             a----a |  |                 |    |
@@ -359,9 +359,39 @@ describe('Layout matchers', function () {
             |    |      |           |   d----d
             a----a      c-----------c
 `);
-            expect([a, b, c]).to.be.inHorizontalSequence({ tolerance: 0, expectedDistance: 1 });
-            expect([a, b, c, d]).to.not.be.inHorizontalSequence({ tolerance: 0, expectedDistance: 1 });
-            expect([a, b, c, d]).to.be.inHorizontalSequence({ tolerance: 2, expectedDistance: 1 });
+            expect([a, b, c]).to.be.inHorizontalSequence({ tolerance: 0, distance: 1 });
+            expect([a, b, c, d]).to.not.be.inHorizontalSequence({ tolerance: 0, distance: 3 });
+            expect([a, b, c, d]).to.not.be.inHorizontalSequence({ tolerance: 0, distance: 1 });
+            expect([a, b, c, d]).to.be.inHorizontalSequence({ tolerance: 2, distance: 1 });
+        });
+
+        it('with specified distance between vertical elements', function () {
+            const {a, b, c, d} = getLayoutFixture(`
+            
+                     a-------a
+                     |       |
+                     |       |
+                     a-------a
+                     
+                b------b
+                |      |
+                b------b
+                
+                       c-------------c
+                       |             |
+                       |             |
+                       |             |
+                       c-------------c
+                       
+                       
+                 d---------d
+                 |         |
+                 d---------d    
+`);
+            expect([a, b, c]).to.be.inVerticalSequence({ tolerance: 0, distance: 1 });
+            expect([a, b, c, d]).to.not.be.inVerticalSequence({ tolerance: 0, distance: 3 });
+            expect([a, b, c, d]).to.not.be.inVerticalSequence({ tolerance: 0, distance: 1 });
+            expect([a, b, c, d]).to.be.inVerticalSequence({ tolerance: 2, distance: 1 });
         });
     });
 });

@@ -88,14 +88,16 @@ function getEdgeAccessors(direction: Direction): [EdgeAccessor, EdgeAccessor] {
 }
 
 
-function findLastElementOfSequence(elements: Element[], direction: Direction, tolerance: number, expectedDistance: number): number {
+function findLastElementOfSequence(elements: Element[], direction: Direction, tolerance: number, distance: number): number {
     const [farEdge, nearEdge] = getEdgeAccessors(direction);
     const boundList = elements.map(getBoundaries);
     for(let i=0; i<boundList.length-1; i++) {
         const distanceBetweenElements = nearEdge(boundList[i+1]) - farEdge(boundList[i]);
-        if (expectedDistance && distanceBetweenElements > expectedDistance + tolerance) {
+        if (distance && !tolerance && distanceBetweenElements !== distance) {
             return i + 1;
-        } else if(!expectedDistance && distanceBetweenElements > tolerance) {
+        } else if (distance && distanceBetweenElements > distance + tolerance) {
+            return i + 1;
+        } else if(!distance && distanceBetweenElements > tolerance) {
             return i+1;
         }
     }
@@ -198,12 +200,12 @@ export default function use(chai: any, util: any) {
         );
     }
 
-    chai.Assertion.addMethod('inHorizontalSequence', function (options: Options = { tolerance: 1.0, expectedDistance: undefined }) {
-        assertSequence.call(this, options.tolerance, options.expectedDistance, "horizontal");
+    chai.Assertion.addMethod('inHorizontalSequence', function (options: Options = { tolerance: 1.0, distance: undefined }) {
+        assertSequence.call(this, options.tolerance, options.distance, "horizontal");
     });
 
-    chai.Assertion.addMethod('inVerticalSequence', function (options: Options = { tolerance: 1.0, expectedDistance: undefined }) {
-        assertSequence.call(this, options.tolerance, options.expectedDistance, "vertical");
+    chai.Assertion.addMethod('inVerticalSequence', function (options: Options = { tolerance: 1.0, distance: undefined }) {
+        assertSequence.call(this, options.tolerance, options.distance, "vertical");
     });
 
     chai.Assertion.addProperty('width', function () {
