@@ -359,9 +359,9 @@ describe('Layout matchers', function () {
             |    |      |           |   d----d
             a----a      c-----------c
 `);
-            expect([a, b, c]).to.be.inHorizontalSequence({ tolerance: 0, distanceBetween: 1 });
-            expect([a, b, c, d]).to.not.be.inHorizontalSequence({ tolerance: 0, distanceBetween: 1 });
-            expect([a, b, c, d]).to.be.inHorizontalSequence({ tolerance: 2, distanceBetween: 1 });
+            expect([a, b, c]).to.be.inHorizontalSequence({ tolerance: 0, expectedDistance: 1 });
+            expect([a, b, c, d]).to.not.be.inHorizontalSequence({ tolerance: 0, expectedDistance: 1 });
+            expect([a, b, c, d]).to.be.inHorizontalSequence({ tolerance: 2, expectedDistance: 1 });
         });
     });
 });
