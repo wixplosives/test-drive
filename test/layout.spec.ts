@@ -311,7 +311,7 @@ describe('Layout matchers', function () {
 
             expect([a, b, c]).to.be.inHorizontalSequence();
             expect([a, b, c, d]).not.to.be.inHorizontalSequence();
-            expect([a, b, c, d]).to.be.inHorizontalSequence(4.0);
+            expect([a, b, c, d]).to.be.inHorizontalSequence({ tolerance: 4.0 });
 
             expect(() => expect([a, b, c, d]).to.be.inHorizontalSequence()).to.throw('Expected elements to form horizontal sequence, but they didn\'t. (3)');
             expect(() => expect([a, b, c]).not.to.be.inHorizontalSequence()).to.throw('Expected elements not to form horizontal sequence, but they did.');
@@ -343,12 +343,24 @@ describe('Layout matchers', function () {
 
             expect([a, b, c]).to.be.inVerticalSequence();
             expect([a, b, c, d]).not.to.be.inVerticalSequence();
-            expect([a, b, c, d]).to.be.inVerticalSequence(4.0);
+            expect([a, b, c, d]).to.be.inVerticalSequence({ tolerance: 4.0 });
 
             expect(() => expect([a, b, c, d]).to.be.inVerticalSequence()).to.throw('Expected elements to form vertical sequence, but they didn\'t. (3)');
             expect(() => expect([a, b, c]).not.to.be.inVerticalSequence()).to.throw('Expected elements not to form vertical sequence, but they did.');
 
             expect(() => expect([]).to.be.inVerticalSequence()).to.throw('Expected elements to form vertical sequence, but element list was empty');
+        });
+
+        it('with specified distance between', function () {
+            const {a, b, c, d} = getLayoutFixture(`
+                   b--b                 d----d
+            a----a |  |                 |    |
+            |    | b--b c-----------c   |    |
+            |    |      |           |   d----d
+            a----a      c-----------c
+`);
+            expect([a, b, c]).to.be.inHorizontalSequence({ distanceBetween: 1, tolerance: 0});
+            expect([a, b, c, d]).to.not.be.inHorizontalSequence({ distanceBetween: 1, tolerance: 0});
         });
     });
 

@@ -1,5 +1,9 @@
 type VerticalAlignment = 'top' | 'center' | 'bottom';
 type HorizontalAlignment = 'left' | 'center' | 'right';
+interface Options {
+    distanceBetween?: number;
+    tolerance?: number;
+}
 
 declare module Chai {
     export interface Assertion {
@@ -14,8 +18,8 @@ declare module Chai {
         biggerThan(comparedTo: Element): Assertion;
         verticallyAligned(alignment: VerticalAlignment, tolerance?: number): Assertion;
         horizontallyAligned(alignment: HorizontalAlignment, tolerance?: number): Assertion;
-        inHorizontalSequence(tolerance?: number): Assertion;
-        inVerticalSequence(tolerance?: number): Assertion;
+        inHorizontalSequence(options?: Options): Assertion;
+        inVerticalSequence(options?: Options): Assertion;
 
         width: Assertion;
         height: Assertion;

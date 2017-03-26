@@ -88,11 +88,14 @@ function getEdgeAccessors(direction: Direction): [EdgeAccessor, EdgeAccessor] {
 }
 
 
-function findLastElementOfSequence(elements: Element[], direction: Direction, tolerance: number): number {
+function findLastElementOfSequence(elements: Element[], direction: Direction, tolerance: number, distanceBetween: number): number {
     const [farEdge, nearEdge] = getEdgeAccessors(direction);
     const boundList = elements.map(getBoundaries);
     for(let i=0; i<boundList.length-1; i++) {
-        if(nearEdge(boundList[i+1]) - farEdge(boundList[i]) > tolerance) {
+        const thing = nearEdge(boundList[i+1]) - farEdge(boundList[i]);
+        if (distanceBetween && thing > distanceBetween + tolerance) {
+            return i + 1;
+        } else if (nearEdge(boundList[i+1]) - farEdge(boundList[i]) > tolerance + distanceBetween) {
             return i+1;
         }
     }
@@ -179,7 +182,7 @@ export default function use(chai: any, util: any) {
         assertAlignment.call(this, "horizontal", alignment, tolerance);
     });
 
-    function assertSequence(tolerance: number, direction: Direction) {
+    function assertSequence(tolerance: number, distanceBetween: number, direction: Direction) {
         const elementList = util.flag(this, 'object');
 
         if (elementList.length === 0) {
@@ -188,19 +191,19 @@ export default function use(chai: any, util: any) {
             throw new Error(`Expected elements to form ${direction} sequence, but element list had only one element`);
         }
 
-        const lastElementOfSequence = findLastElementOfSequence(elementList, direction, tolerance);
+        const lastElementOfSequence = findLastElementOfSequence(elementList, direction, tolerance, distanceBetween);
         this.assert(lastElementOfSequence === elementList.length,
             `Expected elements to form ${direction} sequence, but they didn\'t. (${lastElementOfSequence})`,
             `Expected elements not to form ${direction} sequence, but they did.`
         );
     }
 
-    chai.Assertion.addMethod('inHorizontalSequence', function (tolerance: number = 1.0) {
-        assertSequence.call(this, tolerance, "horizontal");
+    chai.Assertion.addMethod('inHorizontalSequence', function (options: Options = { tolerance: 0, distanceBetween: undefined }) {
+        assertSequence.call(this, options.tolerance, options.distanceBetween, "horizontal");
     });
 
-    chai.Assertion.addMethod('inVerticalSequence', function (tolerance: number = 1.0) {
-        assertSequence.call(this, tolerance, "vertical");
+    chai.Assertion.addMethod('inVerticalSequence', function (options: Options = { tolerance: 0, distanceBetween: undefined }) {
+        assertSequence.call(this, options.tolerance, options.distanceBetween, "vertical");
     });
 
     chai.Assertion.addProperty('width', function () {
