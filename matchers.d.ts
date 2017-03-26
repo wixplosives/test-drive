@@ -1,8 +1,8 @@
 type VerticalAlignment = 'top' | 'center' | 'bottom';
 type HorizontalAlignment = 'left' | 'center' | 'right';
 interface Options {
-    distanceBetween?: number;
     tolerance?: number;
+    distanceBetween?: number;
 }
 
 declare module Chai {

@@ -198,11 +198,11 @@ export default function use(chai: any, util: any) {
         );
     }
 
-    chai.Assertion.addMethod('inHorizontalSequence', function (options: Options = { tolerance: 0, distanceBetween: undefined }) {
+    chai.Assertion.addMethod('inHorizontalSequence', function (options: Options = { tolerance: 1.0, distanceBetween: undefined }) {
         assertSequence.call(this, options.tolerance, options.distanceBetween, "horizontal");
     });
 
-    chai.Assertion.addMethod('inVerticalSequence', function (options: Options = { tolerance: 0, distanceBetween: undefined }) {
+    chai.Assertion.addMethod('inVerticalSequence', function (options: Options = { tolerance: 1.0, distanceBetween: undefined }) {
         assertSequence.call(this, options.tolerance, options.distanceBetween, "vertical");
     });
 

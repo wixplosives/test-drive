@@ -300,7 +300,7 @@ describe('Layout matchers', function () {
     });
 
     describe('Detect sequence of elements', function () {
-        it('horizontally', function () {
+        it.only('horizontally', function () {
             const {a, b, c, d} = getLayoutFixture(`
                    b--b                d----d
             a----a |  |                |    |
