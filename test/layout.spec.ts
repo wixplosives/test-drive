@@ -300,7 +300,7 @@ describe('Layout matchers', function () {
     });
 
     describe('Detect sequence of elements', function () {
-        it.only('horizontally', function () {
+        it('horizontally', function () {
             const {a, b, c, d} = getLayoutFixture(`
                    b--b                d----d
             a----a |  |                |    |
@@ -359,10 +359,9 @@ describe('Layout matchers', function () {
             |    |      |           |   d----d
             a----a      c-----------c
 `);
-            expect([a, b, c]).to.be.inHorizontalSequence({ distanceBetween: 1, tolerance: 0});
-            expect([a, b, c, d]).to.not.be.inHorizontalSequence({ distanceBetween: 1, tolerance: 0});
+            expect([a, b, c]).to.be.inHorizontalSequence({ tolerance: 0, distanceBetween: 1 });
+            expect([a, b, c, d]).to.not.be.inHorizontalSequence({ tolerance: 0, distanceBetween: 1 });
+            expect([a, b, c, d]).to.be.inHorizontalSequence({ tolerance: 2, distanceBetween: 1 });
         });
     });
-
-
 });
