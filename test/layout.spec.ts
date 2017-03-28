@@ -302,11 +302,11 @@ describe('Layout matchers', function () {
     describe('Detect sequence of elements', function () {
         it('horizontally', function () {
             const {a, b, c, d} = getLayoutFixture(`
-                   b--b                 d----d
-            a----a |  |                 |    |
-            |    | b--b c-----------c   |    |
-            |    |      |           |   d----d
-            a----a      c-----------c
+                   b--b                d----d
+            a----a |  |                |    |
+            |    | b--bc-----------c   |    |
+            |    |     |           |   d----d
+            a----a     c-----------c
 `);
 
             expect([a, b, c]).to.be.inHorizontalSequence();
