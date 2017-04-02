@@ -1,4 +1,5 @@
 import { waitFor, expect, sinon  } from '../src';
+import Promise = require('bluebird');
 
 describe('waitFor()', function () {
     it('passes when the state is already as expected', function () {

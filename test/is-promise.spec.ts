@@ -1,6 +1,5 @@
 import { isPromise, expect } from '../src';
-
-declare const Promise: any;
+import Promise = require('bluebird');
 
 describe('The isPromise function', function () {
    it('should return true if passed a native es6 promise', function () {
