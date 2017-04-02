@@ -15,7 +15,7 @@ export function waitFor(assertion: StateAssertionFunction, timeout = 500, pollin
             try {
                 const returnValue = assertion();
                 if (isPromise(returnValue)) {
-                    throw new Error('Promises shouldn\'t be returned from within waitFor! Please refer to the docs for a more detailed explanation of usage');
+                    throw new Error('Promises shouldn\'t be returned from within waitFor/waitForDom! Please refer to the docs for a more detailed explanation of usage');
                 }
             } catch(err) {
                 return err;
@@ -48,24 +48,25 @@ export function waitFor(assertion: StateAssertionFunction, timeout = 500, pollin
 export type DomStateAssertionFunction = (domRoot: Element) => void;
 
 export function waitForDom(domRoot: Element, assertion: DomStateAssertionFunction, timeout = 500) {
-    return new Promise(function (resolve, reject) {
-        let lastErr;
+    if(!('MutationObserver' in window)) {
+        return waitFor(() => assertion(domRoot), timeout, 0);
+    } else {
+        return new Promise(function (resolve, reject) {
+            let lastErr;
 
-        function tryAssertion() {
-            try {
-                const returnValue = assertion(domRoot);
-                if (isPromise(returnValue)) {
-                    throw new Error('Promises shouldn\'t be returned from within waitForDom! Please refer to the docs for a more detailed explanation of usage');
+            function tryAssertion() {
+                try {
+                    const returnValue = assertion(domRoot);
+                    if (isPromise(returnValue)) {
+                        throw new Error('Promises shouldn\'t be returned from within waitFor/waitForDom! Please refer to the docs for a more detailed explanation of usage');
+                    }
+                } catch(err) {
+                    return err;
                 }
-            } catch(err) {
-                return err;
+                return null;
             }
-            return null;
-        }
 
-        if(!('MutationObserver' in window)) {
-            return waitFor(assertion as StateAssertionFunction, timeout, 0);
-        } else {
+
             if(!tryAssertion()) {
                 resolve();
             } else {
@@ -95,9 +96,8 @@ export function waitForDom(domRoot: Element, assertion: DomStateAssertionFunctio
                     subtree: true
                 });
             }
-        }
-
-    });
+        });
+    };
 }
 
 export function isPromise (object: any): boolean {

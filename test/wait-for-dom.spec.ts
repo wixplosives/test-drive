@@ -55,6 +55,6 @@ describe('waitForDom()', function () {
             return new Promise(() => {});
         };
 
-        return expect(waitForDom(document.body, assertion)).to.be.rejectedWith('Promises shouldn\'t be returned from within waitForDom! Please refer to the docs for a more detailed explanation of usage');
+        return expect(waitForDom(document.body, assertion)).to.be.rejectedWith('Promises shouldn\'t be returned from within waitFor/waitForDom! Please refer to the docs for a more detailed explanation of usage');
     });
 });
