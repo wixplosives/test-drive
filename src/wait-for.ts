@@ -63,7 +63,7 @@ export function waitForDom(domRoot: Element, assertion: DomStateAssertionFunctio
             return null;
         }
 
-        if(!('MutationObserver'in window)) {
+        if(!('MutationObserver' in window)) {
             return waitFor(assertion as StateAssertionFunction, timeout, 0);
         } else {
             if(!tryAssertion()) {
