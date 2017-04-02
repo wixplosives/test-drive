@@ -1,10 +1,12 @@
+import matches = require('dom-matches');
+
 export function selectDom(container: Element, attrName: string = 'data-automation-id') {
 
     function select<T extends Element>(parentElement: Element, ...selectors: string[]): T | null {
         const [selector, ...rest] = selectors;
         const selectorExpr = `[${attrName}~="${selector}"]`;
         const elementList: T[] = Array.prototype.slice.call(parentElement.querySelectorAll(selectorExpr));
-        if(parentElement.matches(selectorExpr)) {
+        if(matches(parentElement, selectorExpr)) {
             elementList.unshift(parentElement as T);
         }
         if(elementList.length === 0) {
