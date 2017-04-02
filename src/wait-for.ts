@@ -1,3 +1,4 @@
+import Promise = require('bluebird');
 export type StateAssertionFunction = () => void;
 
 export function waitFor(assertion: StateAssertionFunction, timeout = 500, pollingInterval = 10) {
