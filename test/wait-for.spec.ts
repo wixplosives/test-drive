@@ -1,4 +1,5 @@
 import { waitFor, expect, sinon  } from '../src';
+import Promise = require('bluebird');
 
 describe('waitFor()', function () {
     it('passes when the state is already as expected', function () {
@@ -37,6 +38,6 @@ describe('waitFor()', function () {
             return new Promise(() => {});
         };
 
-        return expect(waitFor(assertion, 50)).to.be.rejectedWith('Promises shouldn\'t be returned from within waitFor! Please refer to the docs for a more detailed explanation of usage');
+        return expect(waitFor(assertion, 50)).to.be.rejectedWith('Promises shouldn\'t be returned from within waitFor/waitForDom! Please refer to the docs for a more detailed explanation of usage');
     });
 });
