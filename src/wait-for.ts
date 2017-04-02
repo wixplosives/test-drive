@@ -2,6 +2,14 @@ export type StateAssertionFunction = () => void;
 
 export function waitFor(assertion: StateAssertionFunction, timeout = 500, pollingInterval = 10) {
     return new Promise(function (resolve, reject) {
+        function poll(cb: Function) {
+            if(pollingInterval > 0) {
+                setTimeout(cb, pollingInterval);
+            } else {
+                window.requestAnimationFrame(cb as FrameRequestCallback);
+            }
+        }
+
         function tryAssertion() {
             try {
                 const returnValue = assertion();
@@ -24,7 +32,7 @@ export function waitFor(assertion: StateAssertionFunction, timeout = 500, pollin
                 if(isTimeOut()) {
                     reject(err);
                 } else {
-                    setTimeout(nextAttempt, pollingInterval);
+                    poll(nextAttempt);
                 }
             } else {
                 resolve();
@@ -54,34 +62,38 @@ export function waitForDom(domRoot: Element, assertion: DomStateAssertionFunctio
             return null;
         }
 
-        if(!tryAssertion()) {
-            resolve();
+        if(!('MutationObserver'in window)) {
+            return waitFor(assertion as StateAssertionFunction, timeout, 0);
         } else {
-            const timeoutTimer = setTimeout(function() {
-                observer.disconnect();
-                const err = tryAssertion();
-                if(err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            }, timeout);
-
-
-            const observer = new MutationObserver(function () {
-                lastErr = tryAssertion();
-                if(!lastErr) {
-                    clearTimeout(timeoutTimer);
+            if(!tryAssertion()) {
+                resolve();
+            } else {
+                const timeoutTimer = setTimeout(function() {
                     observer.disconnect();
-                    resolve();
-                }
-            });
-            observer.observe(domRoot, {
-                childList: true,
-                attributes: true,
-                characterData: true,
-                subtree: true
-            });
+                    const err = tryAssertion();
+                    if(err) {
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                }, timeout);
+
+
+                const observer = new MutationObserver(function () {
+                    lastErr = tryAssertion();
+                    if(!lastErr) {
+                        clearTimeout(timeoutTimer);
+                        observer.disconnect();
+                        resolve();
+                    }
+                });
+                observer.observe(domRoot, {
+                    childList: true,
+                    attributes: true,
+                    characterData: true,
+                    subtree: true
+                });
+            }
         }
 
     });
