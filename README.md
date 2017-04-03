@@ -157,15 +157,15 @@ expect([button1, button2, button3]).to.be.verticallyAligned("top", 1.5);
 
 ### Sequence
 
-`.inHorizontalSequence(tolerance = 1.0)`
+`.inHorizontalSequence({ distance = 0.0, tolerance = 1.0 })`
 
-`.inVerticalSequence(tolerance = 1.0)`
+`.inVerticalSequence({ distance = 0.0, tolerance = 1.0 })`
 
 Asserts that *all elements within a list* form uninterrupted sequence, one adjacent to the other, without gaps. 
 
 Example:
 
 ```javascript
-expect([button1, button2, button3]).to.be.inHorizontalSequence(10.0);
+expect([button1, button2, button3]).to.be.inHorizontalSequence({ distance: 10.0 });
 ```
 
