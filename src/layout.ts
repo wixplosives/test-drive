@@ -234,10 +234,10 @@ export default function use(chai: any, util: any) {
     const propList: Array<keyof ClientRect> = ['width', 'height', 'top', 'bottom', 'left', 'right'];
     propList.forEach(propName => chai.Assertion.addProperty(propName, layoutProperty(propName)));
 
-    chai.Assertion.addMethod('greaterThan', compare);
-    chai.Assertion.addMethod('lessThan', compare);
-    chai.Assertion.addMethod('least', compare);
-    chai.Assertion.addMethod('most', compare);
-    chai.Assertion.addMethod('above', compare);
-    chai.Assertion.addMethod('below', compare);
+    chai.Assertion.overwriteMethod('greaterThan', compare);
+    chai.Assertion.overwriteMethod('lessThan', compare);
+    chai.Assertion.overwriteMethod('least', compare);
+    chai.Assertion.overwriteMethod('most', compare);
+    chai.Assertion.overwriteMethod('above', compare);
+    chai.Assertion.overwriteMethod('below', compare);
 }
