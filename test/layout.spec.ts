@@ -84,12 +84,17 @@ describe('Layout matchers', function () {
         it('comparing them', function () {
             expect(a).to.have.width.greaterThan(10);
             expect(a).to.have.width.greaterThan(b);
+            expect(a).not.to.have.width.lessThan(b);
             expect(a).to.have.height.lessThan(5);
+            expect(a).not.to.have.height.greaterThan(5);
+            expect(()=>expect(a).to.have.height.greaterThan(5)).to.throw(`expected 3 to be above 5`);
             expect(a).to.have.height.lessThan(b);
             expect(b).to.have.height.at.least(7);
+            expect(()=>expect(b).not.to.have.height.at.least(7)).to.throw(`expected 7 to be below 7`);
             expect(b).to.have.height.at.least(c);
             expect(b).to.have.height.at.most(c);
             expect(b).to.be.with.left.above(a);
+            expect(()=>expect(b).to.be.with.left.above(700)).to.throw(`expected 28 to be above 700`);
             expect(b).to.be.with.right.below(c);
         });
     });
