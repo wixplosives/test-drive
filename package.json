@@ -1,6 +1,6 @@
 {
   "name": "test-drive",
-  "version": "0.0.103",
+  "version": "0.0.104",
   "description": "Opinionated library for writing web component tests",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
@@ -43,7 +43,7 @@
     "mocha": "3.3.0",
     "mocha-env-reporter": "2.0.4",
     "mocha-loader": "1.1.1",
-    "npminject": "1.0.288",
+    "npminject": "1.0.289",
     "rimraf": "2.6.1",
     "ts-loader": "2.0.3",
     "typescript": "2.3.2",
