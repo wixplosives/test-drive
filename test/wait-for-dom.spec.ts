@@ -1,4 +1,4 @@
-import { waitForDom, sinon, chai, expect } from '../src';
+import { waitForDom, sinon, expect } from '../src';
 import Promise = require('bluebird');
 
 describe('waitForDom()', function () {

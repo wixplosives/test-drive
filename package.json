@@ -6,11 +6,11 @@
   "types": "./dist/src/index.d.ts",
   "scripts": {
     "clean": "rimraf ./dist",
-    "build": "tsc -d",
+    "build": "tsc",
     "bundle": "webpack --progress",
     "pretest": "npm run clean && npm run build && npm run bundle",
     "test": "npm run test:node && npm run test:browser",
-    "test:node": "mocha --reporter mocha-env-reporter dist/test/index.node.js",
+    "test:node": "mocha --reporter mocha-env-reporter ./dist/test/index.node.js",
     "test:browser": "karma start --single-run",
     "start": "webpack-dev-server --progress"
   },
