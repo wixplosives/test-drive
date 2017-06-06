@@ -90,6 +90,18 @@ Example:
 (https://api.jquery.com/visible-selector/), but not
 necessarily compliant with it.)
 
+### Event Triggering
+
+The `trigger.*` module lets you trigger native DOM events, enabling emultation
+of user interactions in interface tests.
+
+```javascript
+trigger.change(target, "newValue")
+```
+will set `"newValue"` as a new `.value` of an input element (`input`, `select` and `textarea`
+elements are supported), and trigger `focus`, `input` and `change` events.
+
+
 ### Layout Matchers
 
 Using layout matchers, component developers can implement tests which assert relations between various parts of the
