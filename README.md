@@ -92,7 +92,7 @@ necessarily compliant with it.)
 
 ### Event Triggering
 
-The `trigger.*` module lets you trigger native DOM events, enabling emultation
+The `trigger.*` module lets you trigger native DOM events, enabling emulation
 of user interactions in interface tests.
 
 ```javascript
