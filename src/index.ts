@@ -20,3 +20,4 @@ const expect = chai.expect.bind(chai) as Chai.ExpectStatic;
 export * from './select-dom';
 export * from './wait-for';
 export { chai, sinon, expect, layout };
+export * from './trigger';
