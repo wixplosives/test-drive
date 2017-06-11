@@ -1,5 +1,5 @@
 
-import {isElement} from "./scope";
+import {isElement} from "./helpers";
 interface Point {
     x: number;
     y: number;
