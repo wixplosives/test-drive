@@ -1,25 +1,4 @@
-export interface GenericInputElement {
-    value: string;
-    focus(): void;
-}
-
-function getGlobalsOf(element: Element): any {
-    if(element.ownerDocument && element.ownerDocument.defaultView) {
-        return element.ownerDocument.defaultView;
-    } else {
-        return window;
-    }
-}
-
-function isInputElement(element: Element): element is Element & GenericInputElement  {
-    const globalScope = getGlobalsOf(element);
-    const HTMLInputElement = globalScope['HTMLInputElement'];
-    const HTMLTextAreaElement = globalScope['HTMLTextAreaElement'];
-    const HTMLSelectElement = globalScope['HTMLSelectElement'];
-    return element instanceof  HTMLInputElement ||
-        element instanceof HTMLTextAreaElement ||
-        element instanceof HTMLSelectElement;
-}
+import {isInputElement} from "./helpers";
 
 export function change(target: Element | null, newValue: string): void {
     if(target) {

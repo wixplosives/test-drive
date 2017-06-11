@@ -1,4 +1,4 @@
-import {isElement} from "./scope";
+import {isElement} from "./helpers";
 
 function isPresent(element: any): boolean {
     if (isElement(element)) {
