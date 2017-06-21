@@ -1,6 +1,6 @@
 {
   "name": "test-drive",
-  "version": "0.0.156",
+  "version": "0.0.157",
   "description": "Opinionated library for writing web component tests",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
@@ -43,7 +43,7 @@
     "mocha": "3.4.2",
     "mocha-env-reporter": "2.0.4",
     "mocha-loader": "1.1.1",
-    "npminject": "1.0.338",
+    "npminject": "1.0.339",
     "rimraf": "2.6.1",
     "ts-loader": "2.1.0",
     "typescript": "2.3.4",
@@ -51,7 +51,7 @@
     "webpack-dev-server": "1.16.2"
   },
   "dependencies": {
-    "@types/bluebird": "3.5.5",
+    "@types/bluebird": "3.5.6",
     "@types/chai": "4.0.0",
     "@types/chai-as-promised": "0.0.31",
     "@types/chai-dom": "0.0.5",
@@ -62,7 +62,7 @@
     "chai-as-promised": "7.0.0",
     "chai-dom": "1.5.0",
     "dom-matches": "2.0.0",
-    "sinon": "2.3.4",
+    "sinon": "2.3.5",
     "sinon-chai": "2.11.0"
   }
 }
