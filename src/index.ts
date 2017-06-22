@@ -4,7 +4,7 @@ import sinon = require('sinon');
 import chai = require('chai');
 import chaiDom = require('chai-dom');
 import isPresent from './is-present';
-import chaiAsPromised = require('chai-as-promised');
+import chaiAsPromised = require('chai-as-promised-compat');
 import sinonChai = require('sinon-chai');
 import layout from './layout';
 chai.use(layout);
