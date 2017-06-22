@@ -180,4 +180,3 @@ Example:
 ```javascript
 expect([button1, button2, button3]).to.be.inHorizontalSequence({ distance: 10.0 });
 ```
-
