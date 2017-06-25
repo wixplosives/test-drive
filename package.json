@@ -1,6 +1,6 @@
 {
   "name": "test-drive",
-  "version": "0.0.163",
+  "version": "0.0.164",
   "description": "Opinionated library for writing web component tests",
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@types/mocha": "2.2.41",
     "karma": "1.7.0",
-    "karma-chrome-launcher": "2.1.1",
+    "karma-chrome-launcher": "2.2.0",
     "karma-edge-launcher": "0.4.1",
     "karma-env-reporter": "1.0.13",
     "karma-firefox-launcher": "1.0.1",
@@ -43,15 +43,15 @@
     "mocha": "3.4.2",
     "mocha-env-reporter": "2.0.4",
     "mocha-loader": "1.1.1",
-    "npminject": "1.0.345",
+    "npminject": "1.0.346",
     "rimraf": "2.6.1",
-    "ts-loader": "2.1.0",
+    "ts-loader": "2.2.0",
     "typescript": "2.3.4",
     "webpack": "1.14.0",
     "webpack-dev-server": "1.16.2"
   },
   "dependencies": {
-    "@types/bluebird": "3.5.6",
+    "@types/bluebird": "3.5.7",
     "@types/chai": "4.0.1",
     "@types/chai-as-promised": "0.0.31",
     "@types/chai-dom": "0.0.5",
