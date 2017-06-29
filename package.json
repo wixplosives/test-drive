@@ -43,6 +43,12 @@
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0"
   },
+  "files": [
+    "dist/src",
+    "src",
+    "helpers",
+    "matchers.d.ts"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:wix/test-drive.git"
