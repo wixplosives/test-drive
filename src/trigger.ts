@@ -1,8 +1,8 @@
-import {isInputElement} from "./helpers";
+import { isInputElement } from './helpers';
 
 export function change(target: Element | null, newValue: string): void {
-    if(target) {
-        if(isInputElement(target)) {
+    if (target) {
+        if (isInputElement(target)) {
             target.focus();
             event(target, 'focus', {
                 bubbles: false,

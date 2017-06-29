@@ -1,7 +1,7 @@
-import {selectDom, expect} from '../src';
+import { selectDom, expect } from '../src';
 
 function textContent(element: Element | null): string | null {
-    if(element) {
+    if (element) {
         return element.textContent;
     } else {
         return null;

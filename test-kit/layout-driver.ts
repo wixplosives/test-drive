@@ -6,30 +6,30 @@ interface LayoutFixtureMapItem {
     row: number;
 }
 
-type LayoutFixtureMap = { [id: string]: LayoutFixtureMapItem[]}
+type LayoutFixtureMap = { [id: string]: LayoutFixtureMapItem[] }
 
 export function generateMap(source: string): LayoutMap {
     let col = 0;
     let row = 0;
     const map: LayoutFixtureMap = {};
-    for(let ch of source) {
+    for (let ch of source) {
         col++;
-        if(ch === '\n') {
+        if (ch === '\n') {
             row++;
             col = 0;
         }
-        if(ch >= 'a' && ch <= 'z') {
+        if (ch >= 'a' && ch <= 'z') {
             const record = map[ch] || [];
             record.push({ col, row });
             map[ch] = record;
         }
     }
     const geometry: LayoutMap = {};
-    for(let key in map) {
+    for (let key in map) {
         const record = map[key];
         const x = record[0].col;
         const y = record[0].row;
-        const w = record[3].col - x + 1 ;
+        const w = record[3].col - x + 1;
         const h = record[3].row - y + 1;
         geometry[key] = [x, y, w, h];
     }
@@ -47,7 +47,7 @@ export function dom(source: string): DomMap {
     const domMap: DomMap = {
         container
     };
-    for(let elementId in layoutMap) {
+    for (let elementId in layoutMap) {
         const element = document.createElement('div');
         const geometry: Geometry = layoutMap[elementId];
         element.id = elementId;

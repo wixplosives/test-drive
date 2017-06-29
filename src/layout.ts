@@ -1,5 +1,5 @@
+import { isElement } from './helpers';
 
-import {isElement} from "./helpers";
 interface Point {
     x: number;
     y: number;
@@ -16,14 +16,14 @@ export function getBoundaries(element: Element): ClientRect {
 
 function isPointInside(pt: Point, boundaries: ClientRect): boolean {
     return pt.x >= boundaries.left && pt.x <= boundaries.right &&
-            pt.y >= boundaries.top && pt.y <= boundaries.bottom;
+        pt.y >= boundaries.top && pt.y <= boundaries.bottom;
 }
 
 function isInside(rect: ClientRect, boundaries: ClientRect): boolean {
     return rect.left >= boundaries.left &&
-            rect.top >= boundaries.top &&
-            rect.right <= boundaries.right &&
-            rect.bottom <= boundaries.bottom;
+        rect.top >= boundaries.top &&
+        rect.right <= boundaries.right &&
+        rect.bottom <= boundaries.bottom;
 }
 
 function isOutside(rect: ClientRect, boundaries: ClientRect): boolean {
@@ -42,7 +42,7 @@ interface EdgeMapItem {
 
 function findExcludedEdges(edges: number[], range: [number, number]): number[] {
     return edges.reduce<number[]>((acc, edge, index) =>
-        (edge >=range[0] && edge <= range[1])
+        (edge >= range[0] && edge <= range[1])
             ? acc
             : acc.concat(index),
         []);
@@ -50,16 +50,16 @@ function findExcludedEdges(edges: number[], range: [number, number]): number[] {
 
 function getEdgeMap(edges: number[], tolerance: number): EdgeMapItem[] {
     return edges.reduce<EdgeMapItem[]>((acc, edge) => acc.concat(
-        { range: [edge, edge + tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge + tolerance])},
-        { range: [edge, edge - tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge - tolerance])}
+        { range: [edge, edge + tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge + tolerance]) },
+        { range: [edge, edge - tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge - tolerance]) }
     ), []);
 }
 
-function pickLeastExcludedEdges(edgeMap: EdgeMapItem[]): number [] {
+function pickLeastExcludedEdges(edgeMap: EdgeMapItem[]): number[] {
     const excludedEdgeItem = edgeMap.reduce<EdgeMapItem | null>((acc, item) =>
-        (!acc ||item.excludedEdges.length < acc.excludedEdges.length) ? item : acc,
+        (!acc || item.excludedEdges.length < acc.excludedEdges.length) ? item : acc,
         null);
-    if(excludedEdgeItem) {
+    if (excludedEdgeItem) {
         return excludedEdgeItem.excludedEdges;
     } else {
         return [];
@@ -72,7 +72,7 @@ export function detectMisalignment(edges: number[], tolerance: number = 0): numb
 }
 type BoxProps = keyof ClientRect;
 
-const propsByDirection: {[direction: string]: [BoxProps, BoxProps]} = {
+const propsByDirection: { [direction: string]: [BoxProps, BoxProps] } = {
     "horizontal": ['right', 'left'],
     "vertical": ['bottom', 'top']
 };
@@ -91,8 +91,8 @@ function getEdgeAccessors(direction: Direction): [EdgeAccessor, EdgeAccessor] {
 function findLastElementOfSequence(elements: Element[], direction: Direction, tolerance: number = 1, distance: number = 0): number {
     const [farEdge, nearEdge] = getEdgeAccessors(direction);
     const boundList = elements.map(getBoundaries);
-    for(let i=0; i<boundList.length-1; i++) {
-        const distanceBetweenElements = nearEdge(boundList[i+1]) - farEdge(boundList[i]);
+    for (let i = 0; i < boundList.length - 1; i++) {
+        const distanceBetweenElements = nearEdge(boundList[i + 1]) - farEdge(boundList[i]);
         if (Math.abs(distanceBetweenElements - distance) > tolerance) {
             return i + 1;
         }
@@ -156,10 +156,10 @@ export default function use(chai: any, util: any) {
         const edges: number[] = alignment === 'center'
             ? elementList.map(element => {
                 const rect = getBoundaries(element);
-                if(direction === "horizontal") {
-                    return (rect.left + rect.right)/2.0;
+                if (direction === "horizontal") {
+                    return (rect.left + rect.right) / 2.0;
                 } else {
-                    return (rect.top + rect.bottom)/2.0;
+                    return (rect.top + rect.bottom) / 2.0;
                 }
 
             })
@@ -223,7 +223,7 @@ export default function use(chai: any, util: any) {
     function compare(_super: any) {
         return function (x: number | Element) {
             const layout: BoxProps = util.flag(this, 'layout') as BoxProps;
-            if(layout && isElement(x)) {
+            if (layout && isElement(x)) {
                 _super.call(this, getBoundaries(x)[layout]);
             } else {
                 _super.call(this, x);

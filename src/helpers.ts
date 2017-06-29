@@ -4,19 +4,19 @@ export interface GenericInputElement {
 }
 
 export function getGlobalsOf(element: Element): any {
-    if(element.ownerDocument && element.ownerDocument.defaultView) {
+    if (element.ownerDocument && element.ownerDocument.defaultView) {
         return element.ownerDocument.defaultView;
     } else {
         return window;
     }
 }
 
-export function isInputElement(element: Element): element is Element & GenericInputElement  {
+export function isInputElement(element: Element): element is Element & GenericInputElement {
     const globalScope = getGlobalsOf(element);
     const HTMLInputElement = globalScope['HTMLInputElement'];
     const HTMLTextAreaElement = globalScope['HTMLTextAreaElement'];
     const HTMLSelectElement = globalScope['HTMLSelectElement'];
-    return element instanceof  HTMLInputElement ||
+    return element instanceof HTMLInputElement ||
         element instanceof HTMLTextAreaElement ||
         element instanceof HTMLSelectElement;
 }

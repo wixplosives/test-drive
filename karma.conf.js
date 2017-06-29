@@ -1,7 +1,64 @@
 // Karma configuration
 
+const webpack = require('./webpack.config');
+
+const sauceLabsLaunchers = { // Check out https://saucelabs.com/platforms for all browser/platform combos
+    slSafari7: {
+        base: 'SauceLabs',
+        browserName: 'safari',
+        platform: 'OS X 10.9'
+    },
+    slIE10: {
+        base: 'SauceLabs',
+        browserName: 'internet explorer',
+        platform: 'Windows 7',
+        version: '10'
+    },
+    slIE11: {
+        base: 'SauceLabs',
+        browserName: 'internet explorer',
+        platform: 'Windows 7',
+        version: '11'
+    },
+    slChrome: {
+        base: 'SauceLabs',
+        browserName: 'chrome'
+    },
+    slFirefox: {
+        base: 'SauceLabs',
+        browserName: 'firefox'
+    },
+    slAndroid5: {
+        base: 'SauceLabs',
+        browserName: 'android',
+        version: '5.1'
+    },
+    slAndroid4: {
+        base: 'SauceLabs',
+        browserName: 'android',
+        version: '4.4'
+    }
+};
+
 module.exports = function (config) {
-    var karmaConfig = {
+    config.set({
+        // this key is used by karma-webpack, see preprocessors below
+        webpack,
+
+        // the default mime type for ts files is video/mp2t, which Chrome won't execute, so force correct mime type
+        mime: {
+            "text/x-typescript": ["ts", "tsx"],
+        },
+
+        customLaunchers: sauceLabsLaunchers,
+
+        sauceLabs: {
+            startConnect: false,
+            build: 'TRAVIS #' + process.env.TRAVIS_BUILD_NUMBER + ' (' + process.env.TRAVIS_BUILD_ID + ')',
+            tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
+        },
+        captureTimeout: 120000,
+        browserNoActivityTimeout: 25000,
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '',
@@ -14,7 +71,8 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'dist/test.bundle.js'
+            './node_modules/core-js/client/shim.min.js',
+            './test/index.browser.ts'
         ],
 
 
@@ -22,23 +80,19 @@ module.exports = function (config) {
         exclude: [
         ],
 
-        client: {
-            mocha: {
-                reporter: 'html', // change Karma's debug.html to the mocha web reporter
-                ui: 'bdd'
-            }
-        },
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
+            './test/index.browser.ts': ['webpack']
         },
 
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['env'],
+        reporters: ['dots'],
+        // reporters: process.env.TRAVIS ? ['dots', 'saucelabs'] : ['dots'],
 
 
         // web server port
@@ -61,6 +115,7 @@ module.exports = function (config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: ['Chrome'],
+        // browsers: process.env.TRAVIS ? Object.keys(sauceLabsLaunchers) : ['Chrome'],
 
 
         // Continuous Integration mode
@@ -69,18 +124,6 @@ module.exports = function (config) {
 
         // Concurrency level
         // how many browser should be started simultaneous
-        concurrency: Infinity,
-
-        customLaunchers: {
-            chrome_travis_ci: {
-                base: 'Chrome',
-                flags: ['--no-sandbox']
-            }
-        }
-    };
-
-    if (process.env.TRAVIS) {
-        karmaConfig.browsers = ['Firefox']; // ['chrome_travis_ci', 'Firefox'];
-    }
-    config.set(karmaConfig)
-};
+        concurrency: Infinity
+    })
+}

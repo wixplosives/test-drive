@@ -1,4 +1,4 @@
-import {isElement} from "./helpers";
+import { isElement } from './helpers';
 
 function isPresent(element: any): boolean {
     if (isElement(element)) {
@@ -11,7 +11,7 @@ function isPresent(element: any): boolean {
 
 export default function (chai: any, util: any) {
     chai.Assertion.addMethod('present', function () {
-        const {flag} = util;
+        const { flag } = util;
         const element = flag(this, 'object');
         this.assert(isPresent(element),
             'Element expected to be present.',
@@ -20,7 +20,7 @@ export default function (chai: any, util: any) {
     });
 
     chai.Assertion.addMethod('absent', function () {
-        const {flag} = util;
+        const { flag } = util;
         const element = flag(this, 'object');
         this.assert(!isPresent(element),
             'Element expected to be absent.',

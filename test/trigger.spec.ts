@@ -1,4 +1,4 @@
-import {sinon, waitFor, expect, trigger} from "../src";
+import { sinon, waitFor, expect, trigger } from '../src';
 
 function createSpy(): sinon.SinonSpy {
     return sinon.spy();

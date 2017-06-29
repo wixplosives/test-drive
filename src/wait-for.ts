@@ -1,10 +1,9 @@
-import Promise = require('bluebird');
 export type StateAssertionFunction = () => void;
 
 export function waitFor(assertion: StateAssertionFunction, timeout = 500, pollingInterval = 10) {
     return new Promise(function (resolve, reject) {
         function poll(cb: Function) {
-            if(pollingInterval > 0) {
+            if (pollingInterval > 0) {
                 setTimeout(cb, pollingInterval);
             } else {
                 window.requestAnimationFrame(cb as FrameRequestCallback);
@@ -17,7 +16,7 @@ export function waitFor(assertion: StateAssertionFunction, timeout = 500, pollin
                 if (isPromise(returnValue)) {
                     throw new Error('Promises shouldn\'t be returned from within waitFor/waitForDom! Please refer to the docs for a more detailed explanation of usage');
                 }
-            } catch(err) {
+            } catch (err) {
                 return err;
             }
             return null;
@@ -29,8 +28,8 @@ export function waitFor(assertion: StateAssertionFunction, timeout = 500, pollin
 
         function nextAttempt() {
             const err = tryAssertion();
-            if(err) {
-                if(isTimeOut()) {
+            if (err) {
+                if (isTimeOut()) {
                     reject(err);
                 } else {
                     poll(nextAttempt);
@@ -48,7 +47,7 @@ export function waitFor(assertion: StateAssertionFunction, timeout = 500, pollin
 export type DomStateAssertionFunction = (domRoot: Element) => void;
 
 export function waitForDom(domRoot: Element, assertion: DomStateAssertionFunction, timeout = 500) {
-    if(!('MutationObserver' in window)) {
+    if (!('MutationObserver' in window)) {
         return waitFor(() => assertion(domRoot), timeout, 0);
     } else {
         return new Promise(function (resolve, reject) {
@@ -60,20 +59,20 @@ export function waitForDom(domRoot: Element, assertion: DomStateAssertionFunctio
                     if (isPromise(returnValue)) {
                         throw new Error('Promises shouldn\'t be returned from within waitFor/waitForDom! Please refer to the docs for a more detailed explanation of usage');
                     }
-                } catch(err) {
+                } catch (err) {
                     return err;
                 }
                 return null;
             }
 
 
-            if(!tryAssertion()) {
+            if (!tryAssertion()) {
                 resolve();
             } else {
-                const timeoutTimer = setTimeout(function() {
+                const timeoutTimer = setTimeout(function () {
                     observer.disconnect();
                     const err = tryAssertion();
-                    if(err) {
+                    if (err) {
                         reject(err);
                     } else {
                         resolve();
@@ -83,7 +82,7 @@ export function waitForDom(domRoot: Element, assertion: DomStateAssertionFunctio
 
                 const observer = new MutationObserver(function () {
                     lastErr = tryAssertion();
-                    if(!lastErr) {
+                    if (!lastErr) {
                         clearTimeout(timeoutTimer);
                         observer.disconnect();
                         resolve();
@@ -100,6 +99,6 @@ export function waitForDom(domRoot: Element, assertion: DomStateAssertionFunctio
     };
 }
 
-export function isPromise (object: any): boolean {
+export function isPromise(object: any): boolean {
     return typeof object === 'object' && 'then' in object && typeof object.then === 'function';
 }

@@ -1,12 +1,12 @@
-import {expect} from '../src';
-import {getLayoutFixture} from '../test-kit/layout-driver';
-import {detectMisalignment} from "../src/layout";
+import { expect } from '../src';
+import { getLayoutFixture } from '../test-kit/layout-driver';
+import { detectMisalignment } from "../src/layout";
 
 describe('Layout matchers', function () {
     describe('detect placement', function () {
         it('with .insideOf() and .outsideOf()', function () {
-            const {a, b, c, x} = getLayoutFixture(`
-        
+            const { a, b, c, x } = getLayoutFixture(`
+
         x--------------------x
         |                    |      c--c
         |   a-----a          |      |  |
@@ -38,20 +38,20 @@ describe('Layout matchers', function () {
     describe('measure box properties', function () {
         let a: Element, b: Element, c: Element;
         before(function () {
-            ({a, b, c} = getLayoutFixture(`
-                      
-                           b----b      c---------c 
-                           |    |      |         | 
-                           |    |      |         | 
-                           |    |      |         | 
+            ({ a, b, c } = getLayoutFixture(`
+
+                           b----b      c---------c
+                           |    |      |         |
+                           |    |      |         |
+                           |    |      |         |
         a-------------a    |    |      |         |
         |             |    |    |      |         |
-        a-------------a    b----b      c---------c      
+        a-------------a    b----b      c---------c
 `));
         });
 
         function assertBoxProp(element: Element, propName: string, correctValue: number, incorrectValue: number) {
-            (expect(element).to.have  as any)[propName].equal(correctValue);
+            (expect(element).to.have as any)[propName].equal(correctValue);
             (expect(element).not.to.have as any)[propName].equal(incorrectValue);
             expect(() => (expect(element).to.have as any)[propName].equal(incorrectValue)).to.throw(`expected ${correctValue} to equal ${incorrectValue}`);
             expect(() => (expect(element).not.to.have as any)[propName].equal(correctValue)).to.throw(`expected ${correctValue} to not equal ${correctValue}`);
@@ -87,14 +87,14 @@ describe('Layout matchers', function () {
             expect(a).not.to.have.width.lessThan(b);
             expect(a).to.have.height.lessThan(5);
             expect(a).not.to.have.height.greaterThan(5);
-            expect(()=>expect(a).to.have.height.greaterThan(5)).to.throw(`expected 3 to be above 5`);
+            expect(() => expect(a).to.have.height.greaterThan(5)).to.throw(`expected 3 to be above 5`);
             expect(a).to.have.height.lessThan(b);
             expect(b).to.have.height.at.least(7);
-            expect(()=>expect(b).not.to.have.height.at.least(7)).to.throw(`expected 7 to be below 7`);
+            expect(() => expect(b).not.to.have.height.at.least(7)).to.throw(`expected 7 to be below 7`);
             expect(b).to.have.height.at.least(c);
             expect(b).to.have.height.at.most(c);
             expect(b).to.be.with.left.above(a);
-            expect(()=>expect(b).to.be.with.left.above(700)).to.throw(`expected 28 to be above 700`);
+            expect(() => expect(b).to.be.with.left.above(700)).to.throw(`expected 28 to be above 700`);
             expect(b).to.be.with.right.below(c);
         });
     });
@@ -124,12 +124,12 @@ describe('Layout matchers', function () {
         });
 
         it('will throw an error when input list of elements is of length zero or one', () => {
-            const {a} = getLayoutFixture(`
+            const { a } = getLayoutFixture(`
                 a---a
-                |   |    
-                |   |    
-                |   |    
-                a---a                             
+                |   |
+                |   |
+                |   |
+                a---a
             `);
 
             const verticalAlignments: VerticalAlignment[] = ['top', 'bottom', 'center'];
@@ -152,8 +152,8 @@ describe('Layout matchers', function () {
         });
 
         it('(vertical top)', function () {
-            const {a, b, c, d} = getLayoutFixture(`
-            
+            const { a, b, c, d } = getLayoutFixture(`
+
             ----a---a------b---b------d----d---------
                 |   |      |   |      |    |
                 |   |      b---b c--c |    |
@@ -172,16 +172,16 @@ describe('Layout matchers', function () {
         });
 
         it('(vertical center)', function () {
-            const {a, b, c, d} = getLayoutFixture(`
-                                      
-                a---a             c--c    
+            const { a, b, c, d } = getLayoutFixture(`
+
+                a---a             c--c
                 |   |             |  |d----d
                 |   |      b---b  c--c|    |
             ----|   |------|   |------|    |---------
                 |   |      b---b      |    |
                 |   |                 d----d
                 a---a
-            
+
 `);
             expect([a, b, d]).to.be.verticallyAligned('center');
             expect([a, b, c, d]).not.to.be.verticallyAligned('center');
@@ -194,13 +194,13 @@ describe('Layout matchers', function () {
         });
 
         it('(vertical bottom)', function () {
-            const {a, b, c, d} = getLayoutFixture(`
+            const { a, b, c, d } = getLayoutFixture(`
                                       d----d
                 a---a             c--c|    |
                 |   |      b---b  |  ||    |
                 |   |      |   |  c--c|    |
             ----a---a------b---b------d----d---------
-            
+
 `);
             expect([a, b, d]).to.be.verticallyAligned('bottom');
             expect([a, b, c, d]).not.to.be.verticallyAligned('bottom');
@@ -213,8 +213,8 @@ describe('Layout matchers', function () {
         });
 
         it('(horizontal left)', function () {
-            const {a, b, c, d} = getLayoutFixture(`
-            
+            const { a, b, c, d } = getLayoutFixture(`
+
             |
             a---------a
             |         |
@@ -230,7 +230,7 @@ describe('Layout matchers', function () {
             d----d
             |
             |
-            
+
 `);
             expect([a, b, d]).to.be.horizontallyAligned('left');
             expect([a, b, c, d]).not.to.be.horizontallyAligned('left');
@@ -243,8 +243,8 @@ describe('Layout matchers', function () {
         });
 
         it('(horizontal center)', function () {
-            const {a, b, c, d} = getLayoutFixture(`
-            
+            const { a, b, c, d } = getLayoutFixture(`
+
                  |
             a---------a
             |         |
@@ -260,7 +260,7 @@ describe('Layout matchers', function () {
              d-------d
                  |
                  |
-            
+
 `);
             expect([a, b, d]).to.be.horizontallyAligned('center');
             expect([a, b, c, d]).not.to.be.horizontallyAligned('center');
@@ -273,15 +273,15 @@ describe('Layout matchers', function () {
         });
 
         it('(horizontal right)', function () {
-            const {a, b, c, d} = getLayoutFixture(`
-                                  
+            const { a, b, c, d } = getLayoutFixture(`
+
                                   |
-                        a---------a 
-                        |         | 
-                        a---------a 
+                        a---------a
+                        |         |
+                        a---------a
                                   |
-                            b-----b 
-                            b-----b 
+                            b-----b
+                            b-----b
                                   |
                 c----------c      |
                 |          |      |
@@ -290,7 +290,7 @@ describe('Layout matchers', function () {
                              d----d
                                   |
                                   |
-            
+
 `);
             expect([a, b, d]).to.be.horizontallyAligned('right');
             expect([a, b, c, d]).not.to.be.horizontallyAligned('right');
@@ -306,7 +306,7 @@ describe('Layout matchers', function () {
 
     describe('Detect sequence of elements', function () {
         it('horizontally', function () {
-            const {a, b, c, d} = getLayoutFixture(`
+            const { a, b, c, d } = getLayoutFixture(`
                    b--b                d----d
             a----a |  |                |    |
             |    | b--bc-----------c   |    |
@@ -325,8 +325,8 @@ describe('Layout matchers', function () {
         });
 
         it('vertically', function () {
-            const {a, b, c, d} = getLayoutFixture(`
-            
+            const { a, b, c, d } = getLayoutFixture(`
+
                      a-------a
                      |       |
                      |       |
@@ -339,11 +339,11 @@ describe('Layout matchers', function () {
                        |             |
                        |             |
                        c-------------c
-                       
-                       
+
+
                  d---------d
                  |         |
-                 d---------d    
+                 d---------d
 `);
 
             expect([a, b, c]).to.be.inVerticalSequence();
@@ -357,7 +357,7 @@ describe('Layout matchers', function () {
         });
 
         it('with specified distance between horizontal elements', function () {
-            const {a, b, c, d} = getLayoutFixture(`
+            const { a, b, c, d } = getLayoutFixture(`
                      b--b                    d----d
             a----a   |  |                    |    |
             |    |   b--b   c-----------c    |    |
@@ -371,27 +371,27 @@ describe('Layout matchers', function () {
         });
 
         it('with specified distance between vertical elements', function () {
-            const {a, b, c, d} = getLayoutFixture(`
-            
+            const { a, b, c, d } = getLayoutFixture(`
+
                      a-------a
                      |       |
                      |       |
                      a-------a
-                     
+
                 b------b
                 |      |
                 b------b
-                
+
                  c-------------c
                  |             |
                  |             |
                  |             |
                  c-------------c
-                       
-                       
+
+
                  d---------d
                  |         |
-                 d---------d    
+                 d---------d
 `);
             expect([a, b, c]).to.be.inVerticalSequence({ tolerance: 0, distance: 1 });
             expect([a, b, c, d]).to.not.be.inVerticalSequence({ tolerance: 0, distance: 3 });

@@ -37,6 +37,4 @@ dist
 
 # Visual Studio Code local project settings
 .vscode
-
 .idea
-yarn.lock

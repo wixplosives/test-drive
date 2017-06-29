@@ -1,4 +1,4 @@
-import {expect} from "../src";
+import { expect } from '../src';
 
 describe('isPresent() matcher detects', function () {
     let container: HTMLElement;
@@ -13,16 +13,16 @@ describe('isPresent() matcher detects', function () {
     });
 
     it('normal visible element as present (various styles)', function () {
-       container.innerHTML = `
+        container.innerHTML = `
             <div>
                 <div id="myElement">Normal visible element</div>
             </div>
         `;
-       const element = container.querySelector('#myElement');
-       expect(element).to.be.present();
-       expect(element).not.to.be.absent();
-       expect(() => expect(element).not.to.be.present()).to.throw('Element expected to be absent.');
-       expect(() => expect(element).to.be.absent()).to.throw('Element expected to be absent.');
+        const element = container.querySelector('#myElement');
+        expect(element).to.be.present();
+        expect(element).not.to.be.absent();
+        expect(() => expect(element).not.to.be.present()).to.throw('Element expected to be absent.');
+        expect(() => expect(element).to.be.absent()).to.throw('Element expected to be absent.');
     });
 
     it('null as absent (various styles)', function () {

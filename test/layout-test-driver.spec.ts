@@ -1,10 +1,10 @@
-import {expect} from "../src/index";
-import {generateMap, dom, Geometry} from "../test-kit/layout-driver";
+import { expect } from "../src/index";
+import { generateMap, dom, Geometry } from "../test-kit/layout-driver";
 describe('Layout test driver', function () {
     const source =
-`
+        `
         a----------a
-        |          |   b----b  
+        |          |   b----b
         |          |   |    |     c---------c
         |          |   b----b     |         |
         |          |              c---------c
@@ -34,7 +34,7 @@ describe('Layout test driver', function () {
     it('generates DOM from geometry map', function () {
         const map = dom(source);
         document.body.appendChild(map.container);
-        const {a, b, c} = map;
+        const { a, b, c } = map;
         assertElement(a, 'a', [9, 1, 12, 7]);
         assertElement(b, 'b', [24, 2, 6, 3]);
         assertElement(c, 'c', [35, 3, 11, 3]);
