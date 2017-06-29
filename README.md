@@ -1,4 +1,5 @@
 # Test Drive
+[![Build Status](https://travis-ci.org/wix/test-drive.svg?branch=master)](https://travis-ci.org/wix/test-drive)
 
 **Test Drive** is an opinionated, yet framework-agnostic collection of tools, matchers and helpers for efficient Test Driven Development of web applications, GUIs and client-side components. Based on existing Open Source projects, as well as original contributions and ideas, it provides not only practical and efficient solutions for writing reliable tests, but also methodological guidelines based on long-term experimentation and hard-won lessons.
 
@@ -106,7 +107,7 @@ elements are supported), and trigger `focus`, `input` and `change` events.
 
 Using layout matchers, component developers can implement tests which assert relations between various parts of the
 component in terms of position in the document. Layout matchers abstract away the actual DOM structure and CSS rules,
-as they are based solely on 
+as they are based solely on
 [absolute location of bounding rectangles](https://developer.mozilla.org/en-US/docs/Web/API/Element/getClientRects). With
 the right **combination** of layout matchers, one should be able describe most of spatial relationships within components.
 
@@ -173,7 +174,7 @@ expect([button1, button2, button3]).to.be.verticallyAligned("top", 1.5);
 
 `.inVerticalSequence({ distance = 0.0, tolerance = 1.0 })`
 
-Asserts that *all elements within a list* form uninterrupted sequence, one adjacent to the other, without gaps. 
+Asserts that *all elements within a list* form uninterrupted sequence, one adjacent to the other, without gaps.
 
 Example:
 
