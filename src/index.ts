@@ -15,7 +15,7 @@ if (typeof window !== 'undefined') { // chai-dom's matchers are not Node-safe
     chai.use(chaiDom);
 }
 
-const expect = chai.expect.bind(chai) as Chai.ExpectStatic;
+const expect = var copy = Object.assign(chai.expect.bind(chai), chai.expect) as Chai.ExpectStatic;
 
 export * from './select-dom';
 export * from './wait-for';
