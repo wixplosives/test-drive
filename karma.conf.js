@@ -2,44 +2,6 @@
 
 const webpack = require('./webpack.config');
 
-const sauceLabsLaunchers = { // Check out https://saucelabs.com/platforms for all browser/platform combos
-    slSafari7: {
-        base: 'SauceLabs',
-        browserName: 'safari',
-        platform: 'OS X 10.9'
-    },
-    slIE10: {
-        base: 'SauceLabs',
-        browserName: 'internet explorer',
-        platform: 'Windows 7',
-        version: '10'
-    },
-    slIE11: {
-        base: 'SauceLabs',
-        browserName: 'internet explorer',
-        platform: 'Windows 7',
-        version: '11'
-    },
-    slChrome: {
-        base: 'SauceLabs',
-        browserName: 'chrome'
-    },
-    slFirefox: {
-        base: 'SauceLabs',
-        browserName: 'firefox'
-    },
-    slAndroid5: {
-        base: 'SauceLabs',
-        browserName: 'android',
-        version: '5.1'
-    },
-    slAndroid4: {
-        base: 'SauceLabs',
-        browserName: 'android',
-        version: '4.4'
-    }
-};
-
 module.exports = function (config) {
     config.set({
         // this key is used by karma-webpack, see preprocessors below
@@ -50,13 +12,6 @@ module.exports = function (config) {
             "text/x-typescript": ["ts", "tsx"],
         },
 
-        customLaunchers: sauceLabsLaunchers,
-
-        sauceLabs: {
-            startConnect: false,
-            build: 'TRAVIS #' + process.env.TRAVIS_BUILD_NUMBER + ' (' + process.env.TRAVIS_BUILD_ID + ')',
-            tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
-        },
         captureTimeout: 120000,
         browserNoActivityTimeout: 25000,
 
@@ -114,8 +69,7 @@ module.exports = function (config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['Chrome'],
-        // browsers: process.env.TRAVIS ? Object.keys(sauceLabsLaunchers) : ['Chrome'],
+        browsers: ['ChromeHeadless'],
 
 
         // Continuous Integration mode
