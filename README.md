@@ -1,4 +1,5 @@
 # Test Drive
+[![npm version](https://badge.fury.io/js/test-drive.svg)](https://www.npmjs.com/package/test-drive)
 [![Build Status](https://travis-ci.org/wix/test-drive.svg?branch=master)](https://travis-ci.org/wix/test-drive)
 
 **Test Drive** is an opinionated, yet framework-agnostic collection of tools, matchers and helpers for efficient Test Driven Development of web applications, GUIs and client-side components. Based on existing Open Source projects, as well as original contributions and ideas, it provides not only practical and efficient solutions for writing reliable tests, but also methodological guidelines based on long-term experimentation and hard-won lessons.
