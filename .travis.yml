@@ -2,14 +2,16 @@ dist: trusty
 language: node_js
 
 node_js:
-  - '6'
-
-sudo: false
+  - 8
+  - 6
 
 addons:
-  apt:
-    packages:
-      - google-chrome-stable
+  firefox: latest
+  chrome: stable
+
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 
 cache:
   yarn: true
