@@ -34,5 +34,8 @@ declare module Chai {
         most(value: number | Element): Assertion;
         below(value: number | Element): Assertion;
         above(value: number | Element): Assertion;
+
+        // chai-style
+        style(styleName: string, styleValue?: string): Assertion;
     }
 }
