@@ -1,5 +1,20 @@
 import { isInputElement } from './helpers';
 
+export function eventSimple(target: Element, type: string, eventInitDict?: EventInit): void {
+    const event: Event = new Event(type, eventInitDict);
+    target.dispatchEvent(event);
+}
+
+// for browsers without event constructors (IE11)
+export function eventCompat(target: Element, type: string, eventInitDict?: EventInit): void {
+    const event: Event = document.createEvent('Event');
+    const {bubbles = true, cancelable = true} = eventInitDict || {};
+    event.initEvent(type, bubbles , cancelable);
+    target.dispatchEvent(event);
+}
+
+export const event = typeof Event === 'function' ? eventSimple : eventCompat;
+
 export function change(target: Element | null, newValue: string): void {
     if (target) {
         if (isInputElement(target)) {
@@ -25,11 +40,6 @@ export function change(target: Element | null, newValue: string): void {
     } else {
         throw new Error('Trying to trigger "change" on "null" element.');
     }
-}
-
-export function event(target: Element, type: string, payload: any): void {
-    const event: Event = new Event(type, payload);
-    target.dispatchEvent(event);
 }
 
 export const trigger = {
