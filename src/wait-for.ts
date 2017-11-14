@@ -13,8 +13,8 @@ export function waitFor(assertion: StateAssertionFunction, timeout = 500, pollin
         function tryAssertion() {
             try {
                 const returnValue = assertion();
-                if (isPromise(returnValue)) {
-                    throw new Error('Promises shouldn\'t be returned from within waitFor/waitForDom! Please refer to the docs for a more detailed explanation of usage');
+                if (<any>returnValue instanceof Promise) {
+                    return new Error('Promises shouldn\'t be returned from within waitFor/waitForDom! Please refer to the docs for a more detailed explanation of usage');
                 }
             } catch (err) {
                 return err;
@@ -56,8 +56,8 @@ export function waitForDom(domRoot: Element, assertion: DomStateAssertionFunctio
             function tryAssertion() {
                 try {
                     const returnValue = assertion(domRoot);
-                    if (isPromise(returnValue)) {
-                        throw new Error('Promises shouldn\'t be returned from within waitFor/waitForDom! Please refer to the docs for a more detailed explanation of usage');
+                    if (<any>returnValue instanceof Promise) {
+                        return new Error('Promises shouldn\'t be returned from within waitFor/waitForDom! Please refer to the docs for a more detailed explanation of usage');
                     }
                 } catch (err) {
                     return err;
@@ -97,8 +97,4 @@ export function waitForDom(domRoot: Element, assertion: DomStateAssertionFunctio
             }
         });
     };
-}
-
-export function isPromise(object: any): boolean {
-    return typeof object === 'object' && 'then' in object && typeof object.then === 'function';
 }
