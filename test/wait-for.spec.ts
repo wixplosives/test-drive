@@ -1,12 +1,14 @@
 import { waitFor, expect, sinon } from '../src';
 
 describe('waitFor()', function () {
-    it('passes when the state is already as expected', function () {
+    it('passes when the state is already as expected', async () => {
         const state = 666;
         const assertion = sinon.spy(function () {
             expect(state).to.equal(666);
         });
-        waitFor(assertion, 50);
+
+        await waitFor(assertion);
+        
         expect(assertion).to.have.been.called;
     });
 
@@ -18,7 +20,7 @@ describe('waitFor()', function () {
         setTimeout(function () {
             state = 666;
         }, 25);
-        return waitFor(assertion, 50);
+        return waitFor(assertion);
     });
 
     it('fails when the timeout is reached', function () {
