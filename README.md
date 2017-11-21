@@ -183,3 +183,16 @@ Example:
 expect([button1, button2, button3]).to.be.inHorizontalSequence({ distance: 10.0 });
 ```
 
+### Style
+
+_via [chai-style](https://github.com/darlanmendonca/chai-style)_
+
+`.style(styleName, styleValue)`
+
+Asserts that element has style attribute with matching value, regardless of browser-specific value.
+
+Example:
+
+```javascript
+expect(button).to.have.style('background-color','green');
+```
