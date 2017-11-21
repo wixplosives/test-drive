@@ -4,6 +4,19 @@
 
 **Test Drive** is an opinionated, yet framework-agnostic collection of tools, matchers and helpers for efficient Test Driven Development of web applications, GUIs and client-side components. Based on existing Open Source projects, as well as original contributions and ideas, it provides not only practical and efficient solutions for writing reliable tests, but also methodological guidelines based on long-term experimentation and hard-won lessons.
 
+## Installation
+
+test-drive can be installed via the npm registry:
+```
+yarn add test-drive --dev
+```
+If using TypeScript, several @types packages are required as well:
+```
+yarn add @types/chai @types/sinon @types/sinon-chai @types/chai-dom @types/chai-as-promised --dev
+```
+
+**test-drive** exports *sinon* and *chai* via its main entry point. chai's *expect* is also directly exported, and is pre-loaded with chai-as-promised, chai-dom, sinon-chai, and chai-style assertions.
+
 ## How to write tests
 
 ### `waitFor(), waitForDOM()`
