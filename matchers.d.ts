@@ -28,12 +28,12 @@ declare module Chai {
         top: Assertion;
         bottom: Assertion;
 
-        greaterThan(value: number | Element): Assertion;
-        lessThan(value: number | Element): Assertion;
-        least(value: number | Element): Assertion;
-        most(value: number | Element): Assertion;
-        below(value: number | Element): Assertion;
-        above(value: number | Element): Assertion;
+        greaterThan(value: number | Date | Element): Assertion;
+        lessThan(value: number | Date | Element): Assertion;
+        least(value: number | Date | Element): Assertion;
+        most(value: number | Date | Element): Assertion;
+        below(value: number | Date | Element): Assertion;
+        above(value: number | Date | Element): Assertion;
 
         // chai-style
         style(styleName: string, styleValue?: string): Assertion;
