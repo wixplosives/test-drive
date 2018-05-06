@@ -1,5 +1,5 @@
-dist: trusty
 language: node_js
+sudo: required
 
 node_js:
   - 10
@@ -9,9 +9,13 @@ addons:
   firefox: latest
   chrome: stable
 
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+env:
+  - MOZ_HEADLESS=1
+
+#before_script:
+#  - "export DISPLAY=:99.0"
+#  - "sh -e /etc/init.d/xvfb start"
+#  - sleep 3 # give xvfb some time to start
 
 cache:
   yarn: true
