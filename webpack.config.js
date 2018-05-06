@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    devtool: 'source-map',
+    mode: 'development',
     entry: {
         tests: ['core-js/shim', 'mocha-loader!./test/index.browser']
     },
