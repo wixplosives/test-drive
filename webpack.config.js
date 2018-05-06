@@ -21,24 +21,18 @@ module.exports = {
             {
                 test: /\.js$/,
                 include: [
-                    path.resolve(__dirname, 'node_modules/chai-as-promised'),
-                    path.resolve(__dirname, 'node_modules/chai-style')
+                    path.join(__dirname, 'node_modules', 'chai-as-promised'),
+                    path.join(__dirname, 'node_modules' ,'chai-style')
                 ],
                 loader: 'ts-loader',
                 options: {
-                    // needed so it has a separate transpilation instance
-                    instance: 'lib-compat',
+                    instance: 'lib-compat', // needed so it has a separate transpilation instance
                     transpileOnly: true
                 }
             }
         ]
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
-    },
-    output: {
-        filename: '[name].bundle.js',
-        pathinfo: true,
-        path: path.resolve(__dirname, 'dist'),
+        extensions: ['.ts', '.tsx', '.js', '.json']
     }
 }
