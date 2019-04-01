@@ -1,5 +1,5 @@
-import { expect } from "../src/index";
-import { generateMap, dom, Geometry } from "../test-kit/layout-driver";
+import { expect, generateMap, dom, Geometry } from "../src";
+
 describe('Layout test driver', function () {
     const source =
         `

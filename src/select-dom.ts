@@ -1,4 +1,4 @@
-import matches = require('dom-matches');
+import matches from 'dom-matches';
 
 export function selectDom(container: Element, attrName: string = 'data-automation-id') {
 

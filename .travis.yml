@@ -1,13 +1,12 @@
 language: node_js
-sudo: required
 
 node_js:
-  - 10
-  - 8
-
-addons:
-  firefox: latest
-  chrome: stable
+  - 11 # current
+  - 10 # lts
 
 cache:
   yarn: true
+
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s
+  - export PATH=$HOME/.yarn/bin:$PATH

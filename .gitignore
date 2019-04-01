@@ -1,4 +1,6 @@
 # test-drive specific
+cjs
+esm
 dist
 .vscode
 .idea

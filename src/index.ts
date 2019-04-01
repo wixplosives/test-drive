@@ -1,12 +1,12 @@
 /// <reference path="../matchers.d.ts" />
 
-import sinon = require('sinon');
-import chai = require('chai');
-import chaiDom = require('chai-dom');
+import sinon from 'sinon';
+import chai from 'chai';
+import chaiDom from 'chai-dom';
 import isPresent from './is-present';
-import chaiAsPromised = require('chai-as-promised');
-import chaiStyle = require('chai-style');
-import sinonChai = require('sinon-chai');
+import chaiAsPromised from 'chai-as-promised';
+import chaiStyle from 'chai-style';
+import sinonChai from 'sinon-chai';
 import layout from './layout';
 
 chai.use(layout);
@@ -20,7 +20,11 @@ if (typeof window !== 'undefined') { // chai-dom's matchers are not Node-safe
 
 const expect = Object.assign(chai.expect.bind(chai), chai.expect) as Chai.ExpectStatic;
 
+export * from './helpers'
+export * from './layout'
+export * from './layout-driver'
 export * from './select-dom';
 export * from './wait-for';
-export { chai, sinon, expect, layout };
 export * from './trigger';
+
+export { chai, sinon, expect, layout };

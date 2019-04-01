@@ -10,7 +10,7 @@ function isPresent(element: any): boolean {
 }
 
 export default function (chai: any, util: any) {
-    chai.Assertion.addMethod('present', function () {
+    chai.Assertion.addMethod('present', function (this: any) {
         const { flag } = util;
         const element = flag(this, 'object');
         this.assert(isPresent(element),
@@ -19,7 +19,7 @@ export default function (chai: any, util: any) {
         );
     });
 
-    chai.Assertion.addMethod('absent', function () {
+    chai.Assertion.addMethod('absent', function (this: any) {
         const { flag } = util;
         const element = flag(this, 'object');
         this.assert(!isPresent(element),

@@ -1,6 +1,4 @@
-import { expect } from '../src';
-import { getLayoutFixture } from '../test-kit/layout-driver';
-import { detectMisalignment } from "../src/layout";
+import { expect, getLayoutFixture, detectMisalignment } from '../src';
 
 describe('Layout matchers', function () {
     describe('detect placement', function () {

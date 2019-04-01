@@ -101,7 +101,7 @@ function findLastElementOfSequence(elements: Element[], direction: Direction, to
 }
 
 export default function use(chai: any, util: any) {
-    chai.Assertion.addMethod('insideOf', function (boundaryElement: Element) {
+    chai.Assertion.addMethod('insideOf', function (this: any, boundaryElement: Element) {
         const element = util.flag(this, 'object');
         this.assert(isInside(getBoundaries(element), getBoundaries(boundaryElement)),
             'Expected element to be inside of the other, but it wasn\'t.',
@@ -109,7 +109,7 @@ export default function use(chai: any, util: any) {
         );
     });
 
-    chai.Assertion.addMethod('outsideOf', function (boundaryElement: Element) {
+    chai.Assertion.addMethod('outsideOf', function (this: any, boundaryElement: Element) {
         const element = util.flag(this, 'object');
         this.assert(isOutside(getBoundaries(element), getBoundaries(boundaryElement)),
             'Expected element to be outside of the other, but it wasn\'t.',
@@ -117,7 +117,7 @@ export default function use(chai: any, util: any) {
         );
     });
 
-    chai.Assertion.addMethod('widerThan', function (comparedTo: Element) {
+    chai.Assertion.addMethod('widerThan', function (this: any, comparedTo: Element) {
         const element = util.flag(this, 'object');
         this.assert(getBoundaries(element).width > getBoundaries(comparedTo).width,
             'Expected element to be wider than the other, but it wasn\'t.',
@@ -125,7 +125,7 @@ export default function use(chai: any, util: any) {
         );
     });
 
-    chai.Assertion.addMethod('higherThan', function (comparedTo: Element) {
+    chai.Assertion.addMethod('higherThan', function (this: any, comparedTo: Element) {
         const element = util.flag(this, 'object');
         this.assert(getBoundaries(element).height > getBoundaries(comparedTo).height,
             'Expected element to be higher than the other, but it wasn\'t.',
@@ -133,7 +133,7 @@ export default function use(chai: any, util: any) {
         );
     });
 
-    chai.Assertion.addMethod('biggerThan', function (comparedTo: Element) {
+    chai.Assertion.addMethod('biggerThan', function (this: any, comparedTo: Element) {
         const element = util.flag(this, 'object');
         const elementRect: ClientRect = getBoundaries(element);
         const comparedRect: ClientRect = getBoundaries(comparedTo);
@@ -143,7 +143,7 @@ export default function use(chai: any, util: any) {
         );
     });
 
-    function assertAlignment(direction: Direction, alignment: (VerticalAlignment | HorizontalAlignment), tolerance: number) {
+    function assertAlignment(this: any, direction: Direction, alignment: (VerticalAlignment | HorizontalAlignment), tolerance: number) {
         const elementList: Element[] = util.flag(this, 'object');
 
         if (elementList.length === 0) {
@@ -172,15 +172,15 @@ export default function use(chai: any, util: any) {
     }
 
 
-    chai.Assertion.addMethod('verticallyAligned', function (alignment: VerticalAlignment, tolerance: number = 0) {
+    chai.Assertion.addMethod('verticallyAligned', function (this: any, alignment: VerticalAlignment, tolerance: number = 0) {
         assertAlignment.call(this, "vertical", alignment, tolerance);
     });
 
-    chai.Assertion.addMethod('horizontallyAligned', function (alignment: HorizontalAlignment, tolerance: number = 0) {
+    chai.Assertion.addMethod('horizontallyAligned', function (this: any, alignment: HorizontalAlignment, tolerance: number = 0) {
         assertAlignment.call(this, "horizontal", alignment, tolerance);
     });
 
-    function assertSequence(tolerance: number, distanceBetween: number, direction: Direction) {
+    function assertSequence(this: any, direction: Direction, tolerance?: number, distanceBetween?: number) {
         const elementList = util.flag(this, 'object');
 
         if (elementList.length === 0) {
@@ -196,15 +196,15 @@ export default function use(chai: any, util: any) {
         );
     }
 
-    chai.Assertion.addMethod('inHorizontalSequence', function (options: Options = {}) {
-        assertSequence.call(this, options.tolerance, options.distance, "horizontal");
+    chai.Assertion.addMethod('inHorizontalSequence', function (this: any, options: Options = {}) {
+        assertSequence.call(this, "horizontal", options.tolerance, options.distance);
     });
 
-    chai.Assertion.addMethod('inVerticalSequence', function (options: Options = {}) {
-        assertSequence.call(this, options.tolerance, options.distance, "vertical");
+    chai.Assertion.addMethod('inVerticalSequence', function (this: any, options: Options = {}) {
+        assertSequence.call(this, "vertical", options.tolerance, options.distance);
     });
 
-    chai.Assertion.addProperty('width', function () {
+    chai.Assertion.addProperty('width', function (this: any) {
         const element = util.flag(this, 'object');
         const size = getBoundaries(element).width;
         util.flag(this, 'object', size);
@@ -212,7 +212,7 @@ export default function use(chai: any, util: any) {
     });
 
     function layoutProperty(propName: keyof ClientRect) {
-        return function () {
+        return function (this: any) {
             const element = util.flag(this, 'object');
             const size = getBoundaries(element)[propName];
             util.flag(this, 'object', size);
@@ -221,7 +221,7 @@ export default function use(chai: any, util: any) {
     }
 
     function compare(_super: any) {
-        return function (x: number | Element) {
+        return function (this: any, x: number | Element) {
             const layout: BoxProps = util.flag(this, 'layout') as BoxProps;
             if (layout && isElement(x)) {
                 _super.call(this, getBoundaries(x)[layout]);
