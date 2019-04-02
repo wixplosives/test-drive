@@ -25,6 +25,5 @@ export * from './layout'
 export * from './layout-driver'
 export * from './select-dom';
 export * from './wait-for';
-export * from './trigger';
 
 export { chai, sinon, expect, layout };
