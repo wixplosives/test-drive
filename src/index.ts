@@ -9,6 +9,8 @@ import chaiStyle from 'chai-style';
 import sinonChai from 'sinon-chai';
 import layout from './layout';
 
+export { waitFor, IRetryOptions } from 'promise-assist';
+
 chai.use(layout);
 chai.use(sinonChai);
 chai.use(chaiAsPromised);
@@ -24,6 +26,5 @@ export * from './helpers'
 export * from './layout'
 export * from './layout-driver'
 export * from './select-dom';
-export * from './wait-for';
 
 export { chai, sinon, expect, layout };

@@ -19,38 +19,6 @@ yarn add @types/chai @types/sinon @types/sinon-chai @types/chai-dom @types/chai-
 
 ## How to write tests
 
-### `waitFor(), waitForDOM()`
-
-Both return Promise which is fulfilled when specific set of actions
-(typically assertions) pass without throwing exception. If this doesn't
-happen before the `timeout` expires, the Promise will fail with the last
-exception thrown.
-
-In both cases, the action is executed for the first time straight off,
-in a synchronous way.
-
-`waitFor(assertion, timeout = 500, pollingInterval = 10)`
-
-will re-execute the `assertion` sequentially (as specified by the
-`pollingInterval` in miliseconds), until it either passes or the `timeout`
-expires.
-
-`function waitForDom(domRoot, assertion, timeout = 500)`
-
-assumes the `assertion` is related to the state of the DOM (contained in
-`domRoot`) and, therefore, will be retried every time the relevant subtree
-changes.
-
-Example:
-
-```tsx
-
-    return waitFor(() => expect(someVariable).to.equal(666), 1000);
-
-    return waitForDom(document.body, (dom) => expect(dom.querySelector('#myId')).not.to.be.null);
-
-```
-
 ### Locating your DOM parts: `selectDOM()`
 
 `selectDom(container: Element, attrName: string = 'data-automation-id')`

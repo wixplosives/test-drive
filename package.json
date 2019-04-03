@@ -11,9 +11,7 @@
     "build": "yarn build:cjs && yarn build:esm",
     "build:cjs": "tsc -p src --outDir cjs --module commonjs",
     "build:esm": "tsc -p src --outDir esm --module esnext",
-    "test": "yarn test:node && yarn test:browser",
-    "test:node": "mocha -r @ts-tools/node/r ./test/index.node.ts --watch-extensions ts",
-    "test:browser": "mocha-pup ./test/index.browser.ts -c webpack.config.js",
+    "test": "mocha-pup \"./test/**/*.spec.ts\" -c webpack.config.js",
     "prepack": "yarn build"
   },
   "dependencies": {
@@ -22,6 +20,7 @@
     "chai-dom": "^1.8.1",
     "chai-style": "^1.0.3",
     "dom-matches": "^2.0.0",
+    "promise-assist": "^1.2.5",
     "sinon": "^7.3.1",
     "sinon-chai": "^3.3.0"
   },
