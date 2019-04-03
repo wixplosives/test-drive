@@ -1,11 +1,7 @@
 import { selectDom, expect } from '../src';
 
-function textContent(element: Element | null): string | null {
-    if (element) {
-        return element.textContent;
-    } else {
-        return null;
-    }
+function textContent(element: Element | null) {
+    return element && element.textContent;
 }
 
 describe('selectDom', function () {
