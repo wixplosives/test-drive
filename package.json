@@ -21,13 +21,13 @@
     "chai-style": "^1.0.3",
     "dom-matches": "^2.0.0",
     "promise-assist": "^1.2.6",
-    "sinon": "^7.4.1",
+    "sinon": "^7.4.2",
     "sinon-chai": "^3.3.0"
   },
   "devDependencies": {
     "@ts-tools/node": "^0.9.10",
     "@ts-tools/webpack-loader": "^0.8.14",
-    "@types/chai": "^4.2.0",
+    "@types/chai": "^4.2.2",
     "@types/chai-as-promised": "^7.1.2",
     "@types/chai-dom": "^0.0.8",
     "@types/mocha": "^5.2.7",
@@ -35,10 +35,9 @@
     "@types/sinon-chai": "^3.2.3",
     "mocha": "^6.2.0",
     "mocha-pup": "^0.1.18",
-    "rimraf": "^2.6.3",
-    "typescript": "~3.5.3",
-    "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6"
+    "rimraf": "^3.0.0",
+    "typescript": "~3.6.2",
+    "webpack": "^4.39.3"
   },
   "files": [
     "cjs",
