@@ -9,7 +9,7 @@ import chaiStyle from 'chai-style';
 import sinonChai from 'sinon-chai';
 import layout from './layout';
 
-export { waitFor, IRetryOptions } from 'promise-assist';
+export * from 'promise-assist';
 
 chai.use(layout);
 chai.use(sinonChai);

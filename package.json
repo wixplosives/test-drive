@@ -9,8 +9,10 @@
     "clean": "rimraf ./cjs ./esm",
     "prebuild": "yarn clean",
     "build": "yarn build:cjs && yarn build:esm",
-    "build:cjs": "tsc -p src --outDir cjs --module commonjs",
-    "build:esm": "tsc -p src --outDir esm --module esnext",
+    "build:cjs": "tsc -p tsconfig.build.json --outDir cjs --module commonjs",
+    "build:esm": "tsc -p tsconfig.build.json --outDir esm --module esnext",
+    "typecheck": "tsc --noEmit",
+    "pretest": "yarn typecheck",
     "test": "mocha-pup \"./test/**/*.spec.ts\"",
     "prepack": "yarn build"
   },
@@ -42,7 +44,6 @@
     "cjs",
     "esm",
     "src",
-    "!src/tsconfig.json",
     "matchers.d.ts"
   ],
   "repository": {
