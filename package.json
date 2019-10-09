@@ -37,7 +37,7 @@
     "mocha": "^6.2.1",
     "mocha-pup": "^0.1.19",
     "rimraf": "^3.0.0",
-    "typescript": "~3.6.3",
+    "typescript": "~3.6.4",
     "webpack": "^4.41.0"
   },
   "files": [
