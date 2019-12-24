@@ -1,6 +1,6 @@
 {
   "name": "test-drive",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Opinionated library for writing web component tests",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
