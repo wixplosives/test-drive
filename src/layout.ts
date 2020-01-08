@@ -100,7 +100,7 @@ function findLastElementOfSequence(elements: Element[], direction: Direction, to
     return elements.length;
 }
 
-export default function use(chai: any, util: any) {
+export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils) {
     chai.Assertion.addMethod('insideOf', function (this: any, boundaryElement: Element) {
         const element = util.flag(this, 'object');
         this.assert(isInside(getBoundaries(element), getBoundaries(boundaryElement)),

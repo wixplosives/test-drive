@@ -5,8 +5,8 @@ interface Options {
     distance?: number;
 }
 
-declare module Chai {
-    export interface Assertion {
+declare namespace Chai {
+    interface Assertion {
         present(): Assertion;
         absent(): Assertion;
 
@@ -34,8 +34,5 @@ declare module Chai {
         most(value: number | Date | Element): Assertion;
         below(value: number | Date | Element): Assertion;
         above(value: number | Date | Element): Assertion;
-
-        // chai-style
-        style(styleName: string, styleValue?: string): Assertion;
     }
 }

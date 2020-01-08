@@ -2,14 +2,14 @@ import { isElement } from './helpers';
 
 function isPresent(element: any): boolean {
     if (isElement(element)) {
-        const rects = Array.prototype.slice.call(element.getClientRects()) as ClientRect[];
+        const rects = [...element.getClientRects()];
         return rects.some(rectangle => rectangle.width > 0 && rectangle.height > 0);
     } else {
         return false;
     }
 }
 
-export default function (chai: any, util: any) {
+export default function (chai: Chai.ChaiStatic, util: Chai.ChaiUtils) {
     chai.Assertion.addMethod('present', function (this: any) {
         const { flag } = util;
         const element = flag(this, 'object');
