@@ -8,11 +8,11 @@
 
 test-drive can be installed via the npm registry:
 ```
-yarn add test-drive --dev
+npm i test-drive --save-dev
 ```
 If using TypeScript, several @types packages are required as well:
 ```
-yarn add @types/chai @types/sinon @types/sinon-chai @types/chai-dom @types/chai-as-promised --dev
+npm i @types/chai @types/sinon @types/sinon-chai @types/chai-dom @types/chai-as-promised --save-dev
 ```
 
 **test-drive** exports *sinon* and *chai* via its main entry point. chai's *expect* is also directly exported, and is pre-loaded with chai-as-promised, chai-dom, sinon-chai, and chai-style assertions.

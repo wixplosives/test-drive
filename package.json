@@ -7,14 +7,14 @@
   "types": "./esm/index.d.ts",
   "scripts": {
     "clean": "rimraf ./cjs ./esm",
-    "prebuild": "yarn clean",
-    "build": "yarn build:cjs && yarn build:esm",
+    "prebuild": "npm run clean",
+    "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc -p tsconfig.build.json --outDir cjs --module commonjs",
     "build:esm": "tsc -p tsconfig.build.json --outDir esm --module esnext",
     "typecheck": "tsc --noEmit",
-    "pretest": "yarn typecheck",
+    "pretest": "npm run typecheck",
     "test": "mocha-pup \"./test/**/*.spec.ts\"",
-    "prepack": "yarn build"
+    "prepack": "npm run build"
   },
   "dependencies": {
     "chai": "^4.2.0",
