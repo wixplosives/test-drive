@@ -41,7 +41,7 @@
     "puppeteer": "^2.1.1",
     "rimraf": "^3.0.2",
     "typescript": "~3.8.3",
-    "webpack": "^4.42.0"
+    "webpack": "^4.42.1"
   },
   "files": [
     "cjs",
