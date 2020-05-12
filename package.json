@@ -40,7 +40,7 @@
     "mocha-pup": "^3.0.1",
     "puppeteer": "^3.0.4",
     "rimraf": "^3.0.2",
-    "typescript": "~3.8.3",
+    "typescript": "~3.9.2",
     "webpack": "^4.43.0"
   },
   "files": [
