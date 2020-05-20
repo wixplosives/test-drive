@@ -34,7 +34,7 @@
     "@types/chai-style": "^1.0.0",
     "@types/dom-matches": "^2.0.0",
     "@types/mocha": "^7.0.2",
-    "@types/sinon": "^9.0.1",
+    "@types/sinon": "^9.0.3",
     "@types/sinon-chai": "^3.2.4",
     "mocha": "^7.1.2",
     "mocha-pup": "^3.0.1",
