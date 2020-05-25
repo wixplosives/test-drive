@@ -1,7 +1,9 @@
 import matches from 'dom-matches';
 
-export function selectDom(container: Element, attrName: string = 'data-automation-id') {
-
+export function selectDom(
+    container: Element,
+    attrName = 'data-automation-id'
+): (...selectors: string[]) => Element | null {
     function select(parentElement: Element, ...selectors: string[]): Element | null {
         const [selector, ...rest] = selectors;
         const selectorExpr = `[${attrName}~="${selector}"]`;
@@ -25,7 +27,7 @@ export function selectDom(container: Element, attrName: string = 'data-automatio
         }
     }
 
-    return function (...selectors: string[]) {
+    return function (...selectors: string[]): Element | null {
         return select(container, ...selectors);
-    }
+    };
 }

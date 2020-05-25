@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
+
 import { expect, getLayoutFixture, detectMisalignment } from '../src';
 
 describe('Layout matchers', function () {
@@ -19,19 +21,26 @@ describe('Layout matchers', function () {
 
             expect(a).to.be.insideOf(x);
             expect(a).not.to.be.outsideOf(x);
-            expect(() => expect(a).to.be.outsideOf(x)).to.throw('Expected element to be outside of the other, but it wasn\'t.');
-            expect(() => expect(a).not.to.be.insideOf(x)).to.throw('Expected element not to be inside of the other, but it was.');
+            expect(() => expect(a).to.be.outsideOf(x)).to.throw(
+                "Expected element to be outside of the other, but it wasn't."
+            );
+            expect(() => expect(a).not.to.be.insideOf(x)).to.throw(
+                'Expected element not to be inside of the other, but it was.'
+            );
 
             expect(b).not.to.be.insideOf(x);
             expect(b).not.to.be.outsideOf(x);
 
             expect(c).to.be.outsideOf(x);
             expect(c).not.to.be.insideOf(x);
-            expect(() => expect(c).to.be.insideOf(x)).to.throw('Expected element to be inside of the other, but it wasn\'t.');
-            expect(() => expect(c).not.to.be.outsideOf(x)).to.throw('Expected element not to be outside of the other, but it was.');
+            expect(() => expect(c).to.be.insideOf(x)).to.throw(
+                "Expected element to be inside of the other, but it wasn't."
+            );
+            expect(() => expect(c).not.to.be.outsideOf(x)).to.throw(
+                'Expected element not to be outside of the other, but it was.'
+            );
         });
     });
-
 
     describe('measure box properties', function () {
         let a: Element, b: Element, c: Element;
@@ -51,8 +60,12 @@ describe('Layout matchers', function () {
         function assertBoxProp(element: Element, propName: string, correctValue: number, incorrectValue: number) {
             (expect(element).to.have as any)[propName].equal(correctValue);
             (expect(element).not.to.have as any)[propName].equal(incorrectValue);
-            expect(() => (expect(element).to.have as any)[propName].equal(incorrectValue)).to.throw(`expected ${correctValue} to equal ${incorrectValue}`);
-            expect(() => (expect(element).not.to.have as any)[propName].equal(correctValue)).to.throw(`expected ${correctValue} to not equal ${correctValue}`);
+            expect(() => (expect(element).to.have as any)[propName].equal(incorrectValue)).to.throw(
+                `expected ${correctValue} to equal ${incorrectValue}`
+            );
+            expect(() => (expect(element).not.to.have as any)[propName].equal(correctValue)).to.throw(
+                `expected ${correctValue} to not equal ${correctValue}`
+            );
         }
 
         it('asserting width', function () {
@@ -117,8 +130,7 @@ describe('Layout matchers', function () {
 
             it('real edges with tolerance value (some misaligned)', function () {
                 expect(detectMisalignment([5.2, 4.9, 7.3, 5.4, 2.4], 0.5)).to.eql([2, 4]);
-            })
-
+            });
         });
 
         it('will throw an error when input list of elements is of length zero or one', () => {
@@ -133,20 +145,23 @@ describe('Layout matchers', function () {
             const verticalAlignments: VerticalAlignment[] = ['top', 'bottom', 'center'];
             const horizontalAlignments: HorizontalAlignment[] = ['left', 'right', 'center'];
 
-            verticalAlignments.forEach(alignment => {
-                expect(() => expect([]).to.be.verticallyAligned(alignment))
-                    .to.throw(`Expected elements to be vertically aligned to "${alignment}" but element list was empty`);
-                expect(() => expect([a]).to.be.verticallyAligned(alignment))
-                    .to.throw(`Expected elements to be vertically aligned to "${alignment}" but element list had only one element`);
+            verticalAlignments.forEach((alignment) => {
+                expect(() => expect([]).to.be.verticallyAligned(alignment)).to.throw(
+                    `Expected elements to be vertically aligned to "${alignment}" but element list was empty`
+                );
+                expect(() => expect([a]).to.be.verticallyAligned(alignment)).to.throw(
+                    `Expected elements to be vertically aligned to "${alignment}" but element list had only one element`
+                );
             });
 
-            horizontalAlignments.forEach(alignment => {
-                expect(() => expect([]).to.be.horizontallyAligned(alignment))
-                    .to.throw(`Expected elements to be horizontally aligned to "${alignment}" but element list was empty`);
-                expect(() => expect([a]).to.be.horizontallyAligned(alignment))
-                    .to.throw(`Expected elements to be horizontally aligned to "${alignment}" but element list had only one element`);
+            horizontalAlignments.forEach((alignment) => {
+                expect(() => expect([]).to.be.horizontallyAligned(alignment)).to.throw(
+                    `Expected elements to be horizontally aligned to "${alignment}" but element list was empty`
+                );
+                expect(() => expect([a]).to.be.horizontallyAligned(alignment)).to.throw(
+                    `Expected elements to be horizontally aligned to "${alignment}" but element list had only one element`
+                );
             });
-
         });
 
         it('(vertical top)', function () {
@@ -163,10 +178,12 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).not.to.be.verticallyAligned('top');
             expect([a, b, c, d]).to.be.verticallyAligned('top', 2.0);
 
-            expect(() => expect([a, b, c, d]).to.be.verticallyAligned('top'))
-                .to.throw('Expected elements to be vertically aligned to "top" but some weren\'t. ([2])');
-            expect(() => expect([a, b, d]).not.to.be.verticallyAligned('top'))
-                .to.throw('Expected elements not to be vertically aligned to "top" but they were.');
+            expect(() => expect([a, b, c, d]).to.be.verticallyAligned('top')).to.throw(
+                'Expected elements to be vertically aligned to "top" but some weren\'t. ([2])'
+            );
+            expect(() => expect([a, b, d]).not.to.be.verticallyAligned('top')).to.throw(
+                'Expected elements not to be vertically aligned to "top" but they were.'
+            );
         });
 
         it('(vertical center)', function () {
@@ -185,10 +202,12 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).not.to.be.verticallyAligned('center');
             expect([a, b, c, d]).to.be.verticallyAligned('center', 2.0);
 
-            expect(() => expect([a, b, c, d]).to.be.verticallyAligned('center'))
-                .to.throw('Expected elements to be vertically aligned to "center" but some weren\'t. ([2])');
-            expect(() => expect([a, b, d]).not.to.be.verticallyAligned('center'))
-                .to.throw('Expected elements not to be vertically aligned to "center" but they were.');
+            expect(() => expect([a, b, c, d]).to.be.verticallyAligned('center')).to.throw(
+                'Expected elements to be vertically aligned to "center" but some weren\'t. ([2])'
+            );
+            expect(() => expect([a, b, d]).not.to.be.verticallyAligned('center')).to.throw(
+                'Expected elements not to be vertically aligned to "center" but they were.'
+            );
         });
 
         it('(vertical bottom)', function () {
@@ -204,10 +223,12 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).not.to.be.verticallyAligned('bottom');
             expect([a, b, c, d]).to.be.verticallyAligned('bottom', 1.0);
 
-            expect(() => expect([a, b, c, d]).to.be.verticallyAligned('bottom'))
-                .to.throw('Expected elements to be vertically aligned to "bottom" but some weren\'t. ([2])');
-            expect(() => expect([a, b, d]).not.to.be.verticallyAligned('bottom'))
-                .to.throw('Expected elements not to be vertically aligned to "bottom" but they were.');
+            expect(() => expect([a, b, c, d]).to.be.verticallyAligned('bottom')).to.throw(
+                'Expected elements to be vertically aligned to "bottom" but some weren\'t. ([2])'
+            );
+            expect(() => expect([a, b, d]).not.to.be.verticallyAligned('bottom')).to.throw(
+                'Expected elements not to be vertically aligned to "bottom" but they were.'
+            );
         });
 
         it('(horizontal left)', function () {
@@ -234,10 +255,12 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).not.to.be.horizontallyAligned('left');
             expect([a, b, c, d]).to.be.horizontallyAligned('left', 4.0);
 
-            expect(() => expect([a, b, c, d]).to.be.horizontallyAligned('left'))
-                .to.throw('Expected elements to be horizontally aligned to "left" but some weren\'t. ([2])');
-            expect(() => expect([a, b, d]).not.to.be.horizontallyAligned('left'))
-                .to.throw('Expected elements not to be horizontally aligned to "left" but they were.');
+            expect(() => expect([a, b, c, d]).to.be.horizontallyAligned('left')).to.throw(
+                'Expected elements to be horizontally aligned to "left" but some weren\'t. ([2])'
+            );
+            expect(() => expect([a, b, d]).not.to.be.horizontallyAligned('left')).to.throw(
+                'Expected elements not to be horizontally aligned to "left" but they were.'
+            );
         });
 
         it('(horizontal center)', function () {
@@ -264,10 +287,12 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).not.to.be.horizontallyAligned('center');
             expect([a, b, c, d]).to.be.horizontallyAligned('center', 5.0);
 
-            expect(() => expect([a, b, c, d]).to.be.horizontallyAligned('center'))
-                .to.throw('Expected elements to be horizontally aligned to "center" but some weren\'t. ([2])');
-            expect(() => expect([a, b, d]).not.to.be.horizontallyAligned('center'))
-                .to.throw('Expected elements not to be horizontally aligned to "center" but they were.');
+            expect(() => expect([a, b, c, d]).to.be.horizontallyAligned('center')).to.throw(
+                'Expected elements to be horizontally aligned to "center" but some weren\'t. ([2])'
+            );
+            expect(() => expect([a, b, d]).not.to.be.horizontallyAligned('center')).to.throw(
+                'Expected elements not to be horizontally aligned to "center" but they were.'
+            );
         });
 
         it('(horizontal right)', function () {
@@ -294,12 +319,13 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).not.to.be.horizontallyAligned('right');
             expect([a, b, c, d]).to.be.horizontallyAligned('right', 7.0);
 
-            expect(() => expect([a, b, c, d]).to.be.horizontallyAligned('right'))
-                .to.throw('Expected elements to be horizontally aligned to "right" but some weren\'t. ([2])');
-            expect(() => expect([a, b, d]).not.to.be.horizontallyAligned('right'))
-                .to.throw('Expected elements not to be horizontally aligned to "right" but they were.');
+            expect(() => expect([a, b, c, d]).to.be.horizontallyAligned('right')).to.throw(
+                'Expected elements to be horizontally aligned to "right" but some weren\'t. ([2])'
+            );
+            expect(() => expect([a, b, d]).not.to.be.horizontallyAligned('right')).to.throw(
+                'Expected elements not to be horizontally aligned to "right" but they were.'
+            );
         });
-
     });
 
     describe('Detect sequence of elements', function () {
@@ -316,10 +342,16 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).not.to.be.inHorizontalSequence();
             expect([a, b, c, d]).to.be.inHorizontalSequence({ tolerance: 4.0 });
 
-            expect(() => expect([a, b, c, d]).to.be.inHorizontalSequence()).to.throw('Expected elements to form horizontal sequence, but they didn\'t. (3)');
-            expect(() => expect([a, b, c]).not.to.be.inHorizontalSequence()).to.throw('Expected elements not to form horizontal sequence, but they did.');
+            expect(() => expect([a, b, c, d]).to.be.inHorizontalSequence()).to.throw(
+                "Expected elements to form horizontal sequence, but they didn't. (3)"
+            );
+            expect(() => expect([a, b, c]).not.to.be.inHorizontalSequence()).to.throw(
+                'Expected elements not to form horizontal sequence, but they did.'
+            );
 
-            expect(() => expect([]).to.be.inHorizontalSequence()).to.throw('Expected elements to form horizontal sequence, but element list was empty');
+            expect(() => expect([]).to.be.inHorizontalSequence()).to.throw(
+                'Expected elements to form horizontal sequence, but element list was empty'
+            );
         });
 
         it('vertically', function () {
@@ -348,10 +380,16 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).not.to.be.inVerticalSequence();
             expect([a, b, c, d]).to.be.inVerticalSequence({ tolerance: 4.0 });
 
-            expect(() => expect([a, b, c, d]).to.be.inVerticalSequence()).to.throw('Expected elements to form vertical sequence, but they didn\'t. (3)');
-            expect(() => expect([a, b, c]).not.to.be.inVerticalSequence()).to.throw('Expected elements not to form vertical sequence, but they did.');
+            expect(() => expect([a, b, c, d]).to.be.inVerticalSequence()).to.throw(
+                "Expected elements to form vertical sequence, but they didn't. (3)"
+            );
+            expect(() => expect([a, b, c]).not.to.be.inVerticalSequence()).to.throw(
+                'Expected elements not to form vertical sequence, but they did.'
+            );
 
-            expect(() => expect([]).to.be.inVerticalSequence()).to.throw('Expected elements to form vertical sequence, but element list was empty');
+            expect(() => expect([]).to.be.inVerticalSequence()).to.throw(
+                'Expected elements to form vertical sequence, but element list was empty'
+            );
         });
 
         it('with specified distance between horizontal elements', function () {

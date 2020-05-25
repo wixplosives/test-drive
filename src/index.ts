@@ -15,16 +15,17 @@ chai.use(layout);
 chai.use(sinonChai);
 chai.use(chaiAsPromised);
 chai.use(isPresent);
-if (typeof window !== 'undefined') { // chai-dom's matchers are not Node-safe
+if (typeof window !== 'undefined') {
+    // chai-dom's matchers are not Node-safe
     chai.use(chaiDom);
     chai.use(chaiStyle);
 }
 
-const expect = Object.assign(chai.expect.bind(chai), chai.expect) as Chai.ExpectStatic;
+const expect: Chai.ExpectStatic = Object.assign(chai.expect.bind(chai), chai.expect);
 
-export * from './helpers'
-export * from './layout'
-export * from './layout-driver'
+export * from './helpers';
+export * from './layout';
+export * from './layout-driver';
 export * from './select-dom';
 
 export { chai, sinon, expect, layout };

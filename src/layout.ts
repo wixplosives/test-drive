@@ -15,15 +15,16 @@ export function getBoundaries(element: Element): ClientRect {
 }
 
 function isPointInside(pt: Point, boundaries: ClientRect): boolean {
-    return pt.x >= boundaries.left && pt.x <= boundaries.right &&
-        pt.y >= boundaries.top && pt.y <= boundaries.bottom;
+    return pt.x >= boundaries.left && pt.x <= boundaries.right && pt.y >= boundaries.top && pt.y <= boundaries.bottom;
 }
 
 function isInside(rect: ClientRect, boundaries: ClientRect): boolean {
-    return rect.left >= boundaries.left &&
+    return (
+        rect.left >= boundaries.left &&
         rect.top >= boundaries.top &&
         rect.right <= boundaries.right &&
-        rect.bottom <= boundaries.bottom;
+        rect.bottom <= boundaries.bottom
+    );
 }
 
 function isOutside(rect: ClientRect, boundaries: ClientRect): boolean {
@@ -41,24 +42,28 @@ interface EdgeMapItem {
 }
 
 function findExcludedEdges(edges: number[], range: [number, number]): number[] {
-    return edges.reduce<number[]>((acc, edge, index) =>
-        (edge >= range[0] && edge <= range[1])
-            ? acc
-            : acc.concat(index),
-        []);
+    return edges.reduce<number[]>(
+        (acc, edge, index) => (edge >= range[0] && edge <= range[1] ? acc : acc.concat(index)),
+        []
+    );
 }
 
 function getEdgeMap(edges: number[], tolerance: number): EdgeMapItem[] {
-    return edges.reduce<EdgeMapItem[]>((acc, edge) => acc.concat(
-        { range: [edge, edge + tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge + tolerance]) },
-        { range: [edge, edge - tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge - tolerance]) }
-    ), []);
+    return edges.reduce<EdgeMapItem[]>(
+        (acc, edge) =>
+            acc.concat(
+                { range: [edge, edge + tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge + tolerance]) },
+                { range: [edge, edge - tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge - tolerance]) }
+            ),
+        []
+    );
 }
 
 function pickLeastExcludedEdges(edgeMap: EdgeMapItem[]): number[] {
-    const excludedEdgeItem = edgeMap.reduce<EdgeMapItem | null>((acc, item) =>
-        (!acc || item.excludedEdges.length < acc.excludedEdges.length) ? item : acc,
-        null);
+    const excludedEdgeItem = edgeMap.reduce<EdgeMapItem | null>(
+        (acc, item) => (!acc || item.excludedEdges.length < acc.excludedEdges.length ? item : acc),
+        null
+    );
     if (excludedEdgeItem) {
         return excludedEdgeItem.excludedEdges;
     } else {
@@ -66,29 +71,25 @@ function pickLeastExcludedEdges(edgeMap: EdgeMapItem[]): number[] {
     }
 }
 
-export function detectMisalignment(edges: number[], tolerance: number = 0): number[] {
+export function detectMisalignment(edges: number[], tolerance = 0): number[] {
     const edgeMap = getEdgeMap(edges, tolerance);
     return pickLeastExcludedEdges(edgeMap);
 }
 type BoxProps = keyof ClientRect;
 
 const propsByDirection: { [direction: string]: [BoxProps, BoxProps] } = {
-    "horizontal": ['right', 'left'],
-    "vertical": ['bottom', 'top']
+    horizontal: ['right', 'left'],
+    vertical: ['bottom', 'top'],
 };
 
 type EdgeAccessor = (rect: ClientRect) => number;
 
 function getEdgeAccessors(direction: Direction): [EdgeAccessor, EdgeAccessor] {
     const edgeProps = propsByDirection[direction];
-    return [
-        (rect: ClientRect) => rect[edgeProps[0]],
-        rect => rect[edgeProps[1]]
-    ]
+    return [(rect: ClientRect) => rect[edgeProps[0]], (rect) => rect[edgeProps[1]]];
 }
 
-
-function findLastElementOfSequence(elements: Element[], direction: Direction, tolerance: number = 1, distance: number = 0): number {
+function findLastElementOfSequence(elements: Element[], direction: Direction, tolerance = 1, distance = 0): number {
     const [farEdge, nearEdge] = getEdgeAccessors(direction);
     const boundList = elements.map(getBoundaries);
     for (let i = 0; i < boundList.length - 1; i++) {
@@ -100,88 +101,120 @@ function findLastElementOfSequence(elements: Element[], direction: Direction, to
     return elements.length;
 }
 
-export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils) {
-    chai.Assertion.addMethod('insideOf', function (this: any, boundaryElement: Element) {
-        const element = util.flag(this, 'object');
-        this.assert(isInside(getBoundaries(element), getBoundaries(boundaryElement)),
-            'Expected element to be inside of the other, but it wasn\'t.',
-            'Expected element not to be inside of the other, but it was.'
+export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
+    chai.Assertion.addMethod('insideOf', function (boundaryElement: Element) {
+        const element = util.flag(this, 'object') as Element;
+        this.assert(
+            isInside(getBoundaries(element), getBoundaries(boundaryElement)),
+            "Expected element to be inside of the other, but it wasn't.",
+            'Expected element not to be inside of the other, but it was.',
+            true
         );
     });
 
-    chai.Assertion.addMethod('outsideOf', function (this: any, boundaryElement: Element) {
-        const element = util.flag(this, 'object');
-        this.assert(isOutside(getBoundaries(element), getBoundaries(boundaryElement)),
-            'Expected element to be outside of the other, but it wasn\'t.',
-            'Expected element not to be outside of the other, but it was.'
+    chai.Assertion.addMethod('outsideOf', function (boundaryElement: Element) {
+        const element = util.flag(this, 'object') as Element;
+        this.assert(
+            isOutside(getBoundaries(element), getBoundaries(boundaryElement)),
+            "Expected element to be outside of the other, but it wasn't.",
+            'Expected element not to be outside of the other, but it was.',
+            true
         );
     });
 
-    chai.Assertion.addMethod('widerThan', function (this: any, comparedTo: Element) {
-        const element = util.flag(this, 'object');
-        this.assert(getBoundaries(element).width > getBoundaries(comparedTo).width,
-            'Expected element to be wider than the other, but it wasn\'t.',
-            'Expected element not to be wider than the other, but it was.'
+    chai.Assertion.addMethod('widerThan', function (comparedTo: Element) {
+        const element = util.flag(this, 'object') as Element;
+        this.assert(
+            getBoundaries(element).width > getBoundaries(comparedTo).width,
+            "Expected element to be wider than the other, but it wasn't.",
+            'Expected element not to be wider than the other, but it was.',
+            true
         );
     });
 
-    chai.Assertion.addMethod('higherThan', function (this: any, comparedTo: Element) {
-        const element = util.flag(this, 'object');
-        this.assert(getBoundaries(element).height > getBoundaries(comparedTo).height,
-            'Expected element to be higher than the other, but it wasn\'t.',
-            'Expected element not to be higher than the other, but it was.'
+    chai.Assertion.addMethod('higherThan', function (comparedTo: Element) {
+        const element = util.flag(this, 'object') as Element;
+        this.assert(
+            getBoundaries(element).height > getBoundaries(comparedTo).height,
+            "Expected element to be higher than the other, but it wasn't.",
+            'Expected element not to be higher than the other, but it was.',
+            true
         );
     });
 
-    chai.Assertion.addMethod('biggerThan', function (this: any, comparedTo: Element) {
-        const element = util.flag(this, 'object');
+    chai.Assertion.addMethod('biggerThan', function (comparedTo: Element) {
+        const element = util.flag(this, 'object') as Element;
         const elementRect: ClientRect = getBoundaries(element);
         const comparedRect: ClientRect = getBoundaries(comparedTo);
-        this.assert((elementRect.width * elementRect.height) > (comparedRect.width * comparedRect.height),
-            'Expected element to be bigger than the other, but it wasn\'t.',
-            'Expected element not to be bigger than the other, but it was.'
+        this.assert(
+            elementRect.width * elementRect.height > comparedRect.width * comparedRect.height,
+            "Expected element to be bigger than the other, but it wasn't.",
+            'Expected element not to be bigger than the other, but it was.',
+            true
         );
     });
 
-    function assertAlignment(this: any, direction: Direction, alignment: (VerticalAlignment | HorizontalAlignment), tolerance: number) {
-        const elementList: Element[] = util.flag(this, 'object');
+    function assertAlignment(
+        this: Chai.AssertionStatic,
+        direction: Direction,
+        alignment: VerticalAlignment | HorizontalAlignment,
+        tolerance: number
+    ) {
+        const elementList = util.flag(this, 'object') as Element[];
 
         if (elementList.length === 0) {
-            throw new Error(`Expected elements to be ${direction}ly aligned to "${alignment}" but element list was empty`);
+            throw new Error(
+                `Expected elements to be ${direction}ly aligned to "${alignment}" but element list was empty`
+            );
         } else if (elementList.length === 1) {
-            throw new Error(`Expected elements to be ${direction}ly aligned to "${alignment}" but element list had only one element`);
+            throw new Error(
+                `Expected elements to be ${direction}ly aligned to "${alignment}" but element list had only one element`
+            );
         }
 
         const property: BoxProps = alignment as BoxProps;
-        const edges: number[] = alignment === 'center'
-            ? elementList.map(element => {
-                const rect = getBoundaries(element);
-                if (direction === "horizontal") {
-                    return (rect.left + rect.right) / 2.0;
-                } else {
-                    return (rect.top + rect.bottom) / 2.0;
-                }
-
-            })
-            : elementList.map(element => getBoundaries(element)[property]);
+        const edges: number[] =
+            alignment === 'center'
+                ? elementList.map((element) => {
+                      const rect = getBoundaries(element);
+                      if (direction === 'horizontal') {
+                          return (rect.left + rect.right) / 2.0;
+                      } else {
+                          return (rect.top + rect.bottom) / 2.0;
+                      }
+                  })
+                : elementList.map((element) => getBoundaries(element)[property]);
         const misaligned = detectMisalignment(edges, tolerance);
-        this.assert(misaligned.length === 0,
-            `Expected elements to be ${direction}ly aligned to "${alignment}" but some weren\'t. ([${misaligned}])`,
-            `Expected elements not to be ${direction}ly aligned to "${alignment}" but they were.`
-        )
+        this.assert(
+            misaligned.length === 0,
+            `Expected elements to be ${direction}ly aligned to "${alignment}" but some weren't. ([${misaligned.join(
+                ', '
+            )}])`,
+            `Expected elements not to be ${direction}ly aligned to "${alignment}" but they were.`,
+            0,
+            misaligned.length
+        );
     }
 
-
-    chai.Assertion.addMethod('verticallyAligned', function (this: any, alignment: VerticalAlignment, tolerance: number = 0) {
-        assertAlignment.call(this, "vertical", alignment, tolerance);
+    chai.Assertion.addMethod('verticallyAligned', function (alignment: VerticalAlignment, tolerance = 0) {
+        assertAlignment.call(this, 'vertical', alignment, tolerance);
     });
 
-    chai.Assertion.addMethod('horizontallyAligned', function (this: any, alignment: HorizontalAlignment, tolerance: number = 0) {
-        assertAlignment.call(this, "horizontal", alignment, tolerance);
+    chai.Assertion.addMethod('horizontallyAligned', function (
+        this: Chai.AssertionStatic,
+        alignment: HorizontalAlignment,
+        tolerance = 0
+    ) {
+        assertAlignment.call(this, 'horizontal', alignment, tolerance);
     });
 
-    function assertSequence(this: any, direction: Direction, tolerance?: number, distanceBetween?: number) {
-        const elementList = util.flag(this, 'object');
+    function assertSequence(
+        this: Chai.AssertionStatic,
+        direction: Direction,
+        tolerance?: number,
+        distanceBetween?: number
+    ) {
+        const elementList = util.flag(this, 'object') as Element[];
 
         if (elementList.length === 0) {
             throw new Error(`Expected elements to form ${direction} sequence, but element list was empty`);
@@ -190,49 +223,51 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils) {
         }
 
         const lastElementOfSequence = findLastElementOfSequence(elementList, direction, tolerance, distanceBetween);
-        this.assert(lastElementOfSequence === elementList.length,
-            `Expected elements to form ${direction} sequence, but they didn\'t. (${lastElementOfSequence})`,
-            `Expected elements not to form ${direction} sequence, but they did.`
+        this.assert(
+            lastElementOfSequence === elementList.length,
+            `Expected elements to form ${direction} sequence, but they didn't. (${lastElementOfSequence})`,
+            `Expected elements not to form ${direction} sequence, but they did.`,
+            elementList.length,
+            lastElementOfSequence
         );
     }
 
-    chai.Assertion.addMethod('inHorizontalSequence', function (this: any, options: Options = {}) {
-        assertSequence.call(this, "horizontal", options.tolerance, options.distance);
+    chai.Assertion.addMethod('inHorizontalSequence', function (options: Options = {}) {
+        assertSequence.call(this, 'horizontal', options.tolerance, options.distance);
     });
 
-    chai.Assertion.addMethod('inVerticalSequence', function (this: any, options: Options = {}) {
-        assertSequence.call(this, "vertical", options.tolerance, options.distance);
+    chai.Assertion.addMethod('inVerticalSequence', function (options: Options = {}) {
+        assertSequence.call(this, 'vertical', options.tolerance, options.distance);
     });
 
-    chai.Assertion.addProperty('width', function (this: any) {
-        const element = util.flag(this, 'object');
+    chai.Assertion.addProperty('width', function () {
+        const element = util.flag(this, 'object') as Element;
         const size = getBoundaries(element).width;
         util.flag(this, 'object', size);
         util.flag(this, 'layout', 'width');
     });
 
     function layoutProperty(propName: keyof ClientRect) {
-        return function (this: any) {
-            const element = util.flag(this, 'object');
+        return function (this: Chai.AssertionStatic) {
+            const element = util.flag(this, 'object') as Element;
             const size = getBoundaries(element)[propName];
             util.flag(this, 'object', size);
             util.flag(this, 'layout', propName);
-        }
+        };
     }
 
-    function compare(_super: any) {
-        return function (this: any, x: number | Element) {
+    function compare(_super: (this: Chai.AssertionStatic, x: number | Element) => void) {
+        return function (this: Chai.AssertionStatic, x: number | Element) {
             const layout: BoxProps = util.flag(this, 'layout') as BoxProps;
             if (layout && isElement(x)) {
                 _super.call(this, getBoundaries(x)[layout]);
             } else {
                 _super.call(this, x);
             }
-        }
-
+        };
     }
     const propList: Array<keyof ClientRect> = ['width', 'height', 'top', 'bottom', 'left', 'right'];
-    propList.forEach(propName => chai.Assertion.addProperty(propName, layoutProperty(propName)));
+    propList.forEach((propName) => chai.Assertion.addProperty(propName, layoutProperty(propName)));
 
     chai.Assertion.overwriteMethod('greaterThan', compare);
     chai.Assertion.overwriteMethod('lessThan', compare);

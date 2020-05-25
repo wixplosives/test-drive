@@ -1,0 +1,32 @@
+{
+    "env": {
+        "browser": true,
+        "es2020": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended", "prettier"],
+    "plugins": ["no-only-tests"],
+    "rules": {
+        "no-only-tests/no-only-tests": "error",
+        "no-console": "error"
+    },
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "parserOptions": {
+                "project": "./tsconfig.json"
+            },
+            "extends": [
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
+                "prettier/@typescript-eslint"
+            ],
+            "rules": {
+                "@typescript-eslint/no-floating-promises": "error",
+                "@typescript-eslint/triple-slash-reference": "off",
+                "@typescript-eslint/no-use-before-define": "off",
+                "@typescript-eslint/no-unused-vars": "off"
+            }
+        }
+    ]
+}

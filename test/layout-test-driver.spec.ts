@@ -1,8 +1,7 @@
-import { expect, generateMap, dom, Geometry } from "../src";
+import { expect, generateMap, dom, Geometry } from '../src';
 
 describe('Layout test driver', function () {
-    const source =
-        `
+    const source = `
         a----------a
         |          |   b----b
         |          |   |    |     c---------c
@@ -13,11 +12,10 @@ describe('Layout test driver', function () {
 `;
 
     it('generates geometry map from source', function () {
-
         expect(generateMap(source)).to.eql({
             a: [9, 1, 12, 7],
             b: [24, 2, 6, 3],
-            c: [35, 3, 11, 3]
+            c: [35, 3, 11, 3],
         });
     });
 
@@ -25,10 +23,10 @@ describe('Layout test driver', function () {
         const style = getComputedStyle(element);
         expect(element).to.have.id(id);
         expect(style.position).to.equal('absolute');
-        expect(style.left).to.equal(geometry[0] + 'px');
-        expect(style.top).to.equal(geometry[1] + 'px');
-        expect(style.width).to.equal(geometry[2] + 'px');
-        expect(style.height).to.equal(geometry[3] + 'px');
+        expect(style.left).to.equal(`${geometry[0]}px`);
+        expect(style.top).to.equal(`${geometry[1]}px`);
+        expect(style.width).to.equal(`${geometry[2]}px`);
+        expect(style.height).to.equal(`${geometry[3]}px`);
     }
 
     it('generates DOM from geometry map', function () {
