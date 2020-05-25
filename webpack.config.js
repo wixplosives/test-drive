@@ -5,13 +5,11 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: {
-                    loader: '@ts-tools/webpack-loader'
-                }
-            }
-        ]
+                loader: '@ts-tools/webpack-loader',
+            },
+        ],
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json']
-    }
-}
+        extensions: ['.ts', '.tsx', '.js', '.json'],
+    },
+};

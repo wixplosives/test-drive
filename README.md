@@ -1,4 +1,5 @@
 # Test Drive
+
 [![npm version](https://badge.fury.io/js/test-drive.svg)](https://www.npmjs.com/package/test-drive)
 [![Build Status](https://github.com/wixplosives/test-drive/workflows/tests/badge.svg)](https://github.com/wixplosives/test-drive/actions)
 
@@ -7,15 +8,18 @@
 ## Installation
 
 test-drive can be installed via the npm registry:
+
 ```
 npm i test-drive --save-dev
 ```
+
 If using TypeScript, several @types packages are required as well:
+
 ```
 npm i @types/chai @types/sinon @types/sinon-chai @types/chai-dom @types/chai-as-promised --save-dev
 ```
 
-**test-drive** exports *sinon* and *chai* via its main entry point. chai's *expect* is also directly exported, and is pre-loaded with chai-as-promised, chai-dom, sinon-chai, and chai-style assertions.
+**test-drive** exports _sinon_ and _chai_ via its main entry point. chai's _expect_ is also directly exported, and is pre-loaded with chai-as-promised, chai-dom, sinon-chai, and chai-style assertions.
 
 ## How to write tests
 
@@ -29,8 +33,8 @@ DOM selector is a function accepting one or more string identifiers.
 Example:
 
 ```tsx
-    const select = selectDOM(document.body, 'my-id');
-    const element = select('panel1', 'button-ok');
+const select = selectDOM(document.body, 'my-id');
+const element = select('panel1', 'button-ok');
 ```
 
 This code will find, inside the document body, element with attribute
@@ -53,13 +57,11 @@ provides a matcher that abstracts such internal implementation away.
 Example:
 
 ```tsx
+expect(element).to.be.present();
+expect(element).to.be.absent();
 
-    expect(element).to.be.present();
-    expect(element).to.be.absent();
-
-    expect(element).not.to.be.present();
-    expect(element).not.to.be.absent();
-
+expect(element).not.to.be.present();
+expect(element).not.to.be.absent();
 ```
 
 "Presence" is defined as follows:
@@ -69,8 +71,7 @@ Example:
 - some part of "element" has real size (defined as `ClientRect` whose
   both `width` and `height` are greater than zero)
 
-(This definition is inspired by [jQuery's `:visible` selector]
-(https://api.jquery.com/visible-selector/), but not
+(This definition is inspired by [jQuery's `:visible` selector](https://api.jquery.com/visible-selector/), but not
 necessarily compliant with it.)
 
 ### Layout Matchers
@@ -97,7 +98,6 @@ Example:
 
 ```javascript
 expect(button).to.be.insideOf(panel);
-
 ```
 
 ### Box Properties
@@ -130,12 +130,12 @@ visually it will, of course, appear "above".
 
 `.verticallyAligned("top" | "center" | "bottom", tolerance = 0.0)`
 
-The alignment matchers assert that  *all elements within a list* are properly aligned with each other, with optional tolerance range.
+The alignment matchers assert that _all elements within a list_ are properly aligned with each other, with optional tolerance range.
 
 Example:
 
 ```javascript
-expect([button1, button2, button3]).to.be.verticallyAligned("top", 1.5);
+expect([button1, button2, button3]).to.be.verticallyAligned('top', 1.5);
 ```
 
 ### Sequence
@@ -144,7 +144,7 @@ expect([button1, button2, button3]).to.be.verticallyAligned("top", 1.5);
 
 `.inVerticalSequence({ distance = 0.0, tolerance = 1.0 })`
 
-Asserts that *all elements within a list* form uninterrupted sequence, one adjacent to the other, without gaps.
+Asserts that _all elements within a list_ form uninterrupted sequence, one adjacent to the other, without gaps.
 
 Example:
 
@@ -163,5 +163,5 @@ Asserts that element has style attribute with matching value, regardless of brow
 Example:
 
 ```javascript
-expect(button).to.have.style('background-color','green');
+expect(button).to.have.style('background-color', 'green');
 ```
