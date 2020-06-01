@@ -20,13 +20,7 @@
                 "plugin:@typescript-eslint/recommended",
                 "plugin:@typescript-eslint/recommended-requiring-type-checking",
                 "prettier/@typescript-eslint"
-            ],
-            "rules": {
-                "@typescript-eslint/no-floating-promises": "error",
-                "@typescript-eslint/triple-slash-reference": "off",
-                "@typescript-eslint/no-use-before-define": "off",
-                "@typescript-eslint/no-unused-vars": "off"
-            }
+            ]
         }
     ]
 }
