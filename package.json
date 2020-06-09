@@ -31,7 +31,7 @@
     "@ts-tools/webpack-loader": "^1.1.4",
     "@types/chai": "^4.2.11",
     "@types/chai-as-promised": "^7.1.2",
-    "@types/chai-dom": "^0.0.9",
+    "@types/chai-dom": "^0.0.10",
     "@types/chai-style": "^1.0.0",
     "@types/dom-matches": "^2.0.0",
     "@types/mocha": "^7.0.2",
