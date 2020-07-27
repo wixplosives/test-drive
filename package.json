@@ -43,7 +43,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-no-only-tests": "^2.4.0",
     "mocha": "^8.0.1",
-    "mocha-pup": "^3.0.3",
+    "mocha-pup": "^3.0.4",
     "puppeteer": "^5.2.1",
     "rimraf": "^3.0.2",
     "typescript": "~3.9.7",
