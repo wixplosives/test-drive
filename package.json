@@ -24,7 +24,7 @@
     "chai-style": "^1.0.3",
     "dom-matches": "^2.0.0",
     "promise-assist": "^1.3.0",
-    "sinon": "^9.0.2",
+    "sinon": "^9.0.3",
     "sinon-chai": "^3.5.0"
   },
   "devDependencies": {
@@ -37,8 +37,8 @@
     "@types/mocha": "^8.0.1",
     "@types/sinon": "^9.0.4",
     "@types/sinon-chai": "^3.2.4",
-    "@typescript-eslint/eslint-plugin": "^3.8.0",
-    "@typescript-eslint/parser": "^3.8.0",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-no-only-tests": "^2.4.0",
