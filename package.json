@@ -34,7 +34,7 @@
     "@types/chai-dom": "^0.0.10",
     "@types/chai-style": "^1.0.0",
     "@types/dom-matches": "^2.0.0",
-    "@types/mocha": "^8.0.1",
+    "@types/mocha": "^8.0.2",
     "@types/sinon": "^9.0.4",
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
