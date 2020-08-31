@@ -6,7 +6,7 @@ interface Options {
 }
 
 declare namespace Chai {
-    interface Assertion {
+    export interface Assertion {
         present(): Assertion;
         absent(): Assertion;
 
