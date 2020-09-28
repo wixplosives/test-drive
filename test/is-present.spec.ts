@@ -1,6 +1,8 @@
 import { expect } from '../src';
 
 describe('isPresent() matcher detects', function () {
+    this.timeout(5_000);
+
     let container: HTMLElement;
 
     beforeEach(function () {
