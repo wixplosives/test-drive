@@ -42,12 +42,13 @@
     "eslint": "^7.13.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-no-only-tests": "^2.4.0",
+    "html-webpack-plugin": "^5.0.0-alpha.14",
     "mocha": "^8.2.1",
-    "mocha-pup": "^4.0.4",
+    "mocha-pup": "^5.1.0",
     "puppeteer": "^5.5.0",
     "rimraf": "^3.0.2",
     "typescript": "~4.0.5",
-    "webpack": "^4.44.2"
+    "webpack": "^5.5.1"
   },
   "files": [
     "cjs",

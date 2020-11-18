@@ -1,3 +1,4 @@
+/** @type {import('webpack').Configuration} */
 module.exports = {
     mode: 'development',
     devtool: 'source-map',
