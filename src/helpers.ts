@@ -20,9 +20,9 @@ export function isInputElement(element: Element): element is Element & GenericIn
 }
 
 export function isElement(obj: unknown): obj is Element {
-    return obj && obj instanceof getGlobalsOf(obj as Element)['Element'];
+    return !!obj && obj instanceof getGlobalsOf(obj as Element)['Element'];
 }
 
 export function isHTMLElement(obj: unknown): obj is HTMLElement {
-    return obj && obj instanceof getGlobalsOf(obj as Element)['HTMLElement'];
+    return !!obj && obj instanceof getGlobalsOf(obj as Element)['HTMLElement'];
 }
