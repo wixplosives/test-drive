@@ -39,7 +39,7 @@
     "@types/sinon-chai": "^3.2.5",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
-    "eslint": "^7.17.0",
+    "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-no-only-tests": "^2.4.0",
     "html-webpack-plugin": "^5.0.0-beta.5",
@@ -49,7 +49,7 @@
     "rimraf": "^3.0.2",
     "typescript": "~4.1.3",
     "util": "^0.12.3",
-    "webpack": "^5.14.0"
+    "webpack": "^5.15.0"
   },
   "files": [
     "cjs",
