@@ -41,7 +41,7 @@
     "@typescript-eslint/parser": "^4.21.0",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-no-only-tests": "^2.4.0",
+    "eslint-plugin-no-only-tests": "^2.5.0",
     "html-webpack-plugin": "^5.3.1",
     "mocha": "^8.3.2",
     "mocha-play": "^1.0.1",
