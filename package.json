@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@ts-tools/webpack-loader": "^2.1.1",
-    "@types/chai": "^4.2.16",
+    "@types/chai": "^4.2.17",
     "@types/chai-as-promised": "^7.1.3",
     "@types/chai-dom": "^0.0.10",
     "@types/chai-style": "^1.0.0",
