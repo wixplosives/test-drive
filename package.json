@@ -45,7 +45,7 @@
     "html-webpack-plugin": "^5.3.1",
     "mocha": "^9.0.0",
     "mocha-play": "^1.0.1",
-    "playwright-chromium": "^1.12.1",
+    "playwright-chromium": "^1.12.2",
     "rimraf": "^3.0.2",
     "typescript": "~4.3.2",
     "util": "^0.12.4",
