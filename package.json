@@ -44,11 +44,11 @@
     "eslint-plugin-no-only-tests": "^2.6.0",
     "mocha": "^9.0.3",
     "mocha-play": "^2.0.3",
-    "playwright-chromium": "^1.13.0",
+    "playwright-chromium": "^1.13.1",
     "rimraf": "^3.0.2",
     "typescript": "~4.3.5",
     "util": "^0.12.4",
-    "webpack": "^5.47.0"
+    "webpack": "^5.47.1"
   },
   "files": [
     "cjs",
