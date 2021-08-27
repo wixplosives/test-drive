@@ -10,15 +10,15 @@ type HorizontalAlignment = 'left' | 'center' | 'right';
 
 type Direction = 'vertical' | 'horizontal';
 
-export function getBoundaries(element: Element): ClientRect {
+export function getBoundaries(element: Element): DOMRect {
     return element.getBoundingClientRect();
 }
 
-function isPointInside(pt: Point, boundaries: ClientRect): boolean {
+function isPointInside(pt: Point, boundaries: DOMRect): boolean {
     return pt.x >= boundaries.left && pt.x <= boundaries.right && pt.y >= boundaries.top && pt.y <= boundaries.bottom;
 }
 
-function isInside(rect: ClientRect, boundaries: ClientRect): boolean {
+function isInside(rect: DOMRect, boundaries: DOMRect): boolean {
     return (
         rect.left >= boundaries.left &&
         rect.top >= boundaries.top &&
@@ -27,7 +27,7 @@ function isInside(rect: ClientRect, boundaries: ClientRect): boolean {
     );
 }
 
-function isOutside(rect: ClientRect, boundaries: ClientRect): boolean {
+function isOutside(rect: DOMRect, boundaries: DOMRect): boolean {
     return !(
         isPointInside({ x: rect.left, y: rect.top }, boundaries) ||
         isPointInside({ x: rect.left, y: rect.bottom }, boundaries) ||
@@ -75,18 +75,17 @@ export function detectMisalignment(edges: number[], tolerance = 0): number[] {
     const edgeMap = getEdgeMap(edges, tolerance);
     return pickLeastExcludedEdges(edgeMap);
 }
-type BoxProps = keyof ClientRect;
 
-const propsByDirection: { [direction: string]: [BoxProps, BoxProps] } = {
-    horizontal: ['right', 'left'],
-    vertical: ['bottom', 'top'],
+const propsByDirection = {
+    horizontal: ['right', 'left'] as const,
+    vertical: ['bottom', 'top'] as const,
 };
 
-type EdgeAccessor = (rect: ClientRect) => number;
+type EdgeAccessor = (rect: DOMRect) => number;
 
 function getEdgeAccessors(direction: Direction): [EdgeAccessor, EdgeAccessor] {
-    const edgeProps = propsByDirection[direction];
-    return [(rect: ClientRect) => rect[edgeProps[0]], (rect) => rect[edgeProps[1]]];
+    const [prop1, prop2] = propsByDirection[direction];
+    return [(rect) => rect[prop1], (rect) => rect[prop2]];
 }
 
 function findLastElementOfSequence(elements: Element[], direction: Direction, tolerance = 1, distance = 0): number {
@@ -172,7 +171,6 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
             );
         }
 
-        const property: BoxProps = alignment as BoxProps;
         const edges: number[] =
             alignment === 'center'
                 ? elementList.map((element) => {
@@ -183,7 +181,7 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
                           return (rect.top + rect.bottom) / 2.0;
                       }
                   })
-                : elementList.map((element) => getBoundaries(element)[property]);
+                : elementList.map((element) => getBoundaries(element)[alignment]);
         const misaligned = detectMisalignment(edges, tolerance);
         this.assert(
             misaligned.length === 0,
@@ -200,13 +198,12 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
         assertAlignment.call(this, 'vertical', alignment, tolerance);
     });
 
-    chai.Assertion.addMethod('horizontallyAligned', function (
-        this: Chai.AssertionStatic,
-        alignment: HorizontalAlignment,
-        tolerance = 0
-    ) {
-        assertAlignment.call(this, 'horizontal', alignment, tolerance);
-    });
+    chai.Assertion.addMethod(
+        'horizontallyAligned',
+        function (this: Chai.AssertionStatic, alignment: HorizontalAlignment, tolerance = 0) {
+            assertAlignment.call(this, 'horizontal', alignment, tolerance);
+        }
+    );
 
     function assertSequence(
         this: Chai.AssertionStatic,
@@ -258,7 +255,7 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
 
     function compare(_super: (this: Chai.AssertionStatic, x: number | Element) => void) {
         return function (this: Chai.AssertionStatic, x: number | Element) {
-            const layout: BoxProps = util.flag(this, 'layout') as BoxProps;
+            const layout = util.flag(this, 'layout') as Exclude<keyof DOMRect, 'toJSON'>;
             if (layout && isElement(x)) {
                 _super.call(this, getBoundaries(x)[layout]);
             } else {
