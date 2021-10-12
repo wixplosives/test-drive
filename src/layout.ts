@@ -195,13 +195,13 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
     }
 
     chai.Assertion.addMethod('verticallyAligned', function (alignment: VerticalAlignment, tolerance = 0) {
-        assertAlignment.call(this, 'vertical', alignment, tolerance);
+        assertAlignment.call(this, 'vertical', alignment, tolerance as number);
     });
 
     chai.Assertion.addMethod(
         'horizontallyAligned',
         function (this: Chai.AssertionStatic, alignment: HorizontalAlignment, tolerance = 0) {
-            assertAlignment.call(this, 'horizontal', alignment, tolerance);
+            assertAlignment.call(this, 'horizontal', alignment, tolerance as number);
         }
     );
 
