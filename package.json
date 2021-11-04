@@ -72,22 +72,5 @@
   },
   "homepage": "https://github.com/wixplosives/test-drive#readme",
   "license": "MIT",
-  "sideEffects": false,
-  "prettier": {
-    "printWidth": 120,
-    "singleQuote": true,
-    "tabWidth": 4,
-    "overrides": [
-      {
-        "files": [
-          "*.json",
-          "*.md",
-          "*.yml"
-        ],
-        "options": {
-          "tabWidth": 2
-        }
-      }
-    ]
-  }
+  "sideEffects": false
 }
