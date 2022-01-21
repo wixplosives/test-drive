@@ -44,7 +44,7 @@
     "eslint-plugin-no-only-tests": "^2.6.0",
     "mocha": "^9.1.4",
     "mocha-play": "^3.0.1",
-    "playwright-chromium": "^1.17.2",
+    "playwright-chromium": "^1.18.0",
     "rimraf": "^3.0.2",
     "typescript": "~4.5.4",
     "util": "^0.12.4",
