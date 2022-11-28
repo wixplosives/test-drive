@@ -165,3 +165,7 @@ Example:
 ```javascript
 expect(button).to.have.style('background-color', 'green');
 ```
+
+# License
+
+MIT
