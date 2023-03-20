@@ -1,4 +1,4 @@
-import { expect, generateMap, dom, Geometry } from '../src';
+import { expect, generateMap, dom, type Geometry } from '../src';
 
 describe('Layout test driver', function () {
     const source = `
