@@ -43,10 +43,10 @@
     "eslint-plugin-no-only-tests": "^3.1.0",
     "mocha": "^10.2.0",
     "mocha-play": "^5.0.1",
-    "playwright-chromium": "^1.32.3",
+    "playwright-chromium": "^1.33.0",
     "rimraf": "^5.0.0",
     "typescript": "~5.0.4",
-    "webpack": "^5.80.0"
+    "webpack": "^5.81.0"
   },
   "files": [
     "cjs",
