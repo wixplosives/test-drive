@@ -46,7 +46,7 @@
     "playwright-chromium": "^1.33.0",
     "rimraf": "^5.0.1",
     "typescript": "~5.0.4",
-    "webpack": "^5.82.1"
+    "webpack": "^5.83.1"
   },
   "files": [
     "cjs",
