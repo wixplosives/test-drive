@@ -44,7 +44,7 @@
     "mocha": "^10.2.0",
     "mocha-play": "^5.0.1",
     "playwright-chromium": "^1.33.0",
-    "rimraf": "^5.0.0",
+    "rimraf": "^5.0.1",
     "typescript": "~5.0.4",
     "webpack": "^5.82.1"
   },
