@@ -13,6 +13,6 @@ jobs:
           node-version: 18
           registry-url: 'https://registry.npmjs.org/'
       - run: npm ci
-      - run: npx pleb@5 publish
+      - run: npx pleb@6 publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
