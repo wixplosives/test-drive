@@ -2,7 +2,7 @@ import matches from 'dom-matches';
 
 export function selectDom(
     container: Element,
-    attrName = 'data-automation-id'
+    attrName = 'data-automation-id',
 ): (...selectors: string[]) => Element | null {
     function select(parentElement: Element, ...selectors: string[]): Element | null {
         const [selector, ...rest] = selectors;

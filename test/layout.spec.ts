@@ -22,10 +22,10 @@ describe('Layout matchers', function () {
             expect(a).to.be.insideOf(x);
             expect(a).not.to.be.outsideOf(x);
             expect(() => expect(a).to.be.outsideOf(x)).to.throw(
-                "Expected element to be outside of the other, but it wasn't."
+                "Expected element to be outside of the other, but it wasn't.",
             );
             expect(() => expect(a).not.to.be.insideOf(x)).to.throw(
-                'Expected element not to be inside of the other, but it was.'
+                'Expected element not to be inside of the other, but it was.',
             );
 
             expect(b).not.to.be.insideOf(x);
@@ -34,10 +34,10 @@ describe('Layout matchers', function () {
             expect(c).to.be.outsideOf(x);
             expect(c).not.to.be.insideOf(x);
             expect(() => expect(c).to.be.insideOf(x)).to.throw(
-                "Expected element to be inside of the other, but it wasn't."
+                "Expected element to be inside of the other, but it wasn't.",
             );
             expect(() => expect(c).not.to.be.outsideOf(x)).to.throw(
-                'Expected element not to be outside of the other, but it was.'
+                'Expected element not to be outside of the other, but it was.',
             );
         });
     });
@@ -61,10 +61,10 @@ describe('Layout matchers', function () {
             (expect(element).to.have as any)[propName].equal(correctValue);
             (expect(element).not.to.have as any)[propName].equal(incorrectValue);
             expect(() => (expect(element).to.have as any)[propName].equal(incorrectValue)).to.throw(
-                `expected ${correctValue} to equal ${incorrectValue}`
+                `expected ${correctValue} to equal ${incorrectValue}`,
             );
             expect(() => (expect(element).not.to.have as any)[propName].equal(correctValue)).to.throw(
-                `expected ${correctValue} to not equal ${correctValue}`
+                `expected ${correctValue} to not equal ${correctValue}`,
             );
         }
 
@@ -147,19 +147,19 @@ describe('Layout matchers', function () {
 
             verticalAlignments.forEach((alignment) => {
                 expect(() => expect([]).to.be.verticallyAligned(alignment)).to.throw(
-                    `Expected elements to be vertically aligned to "${alignment}" but element list was empty`
+                    `Expected elements to be vertically aligned to "${alignment}" but element list was empty`,
                 );
                 expect(() => expect([a]).to.be.verticallyAligned(alignment)).to.throw(
-                    `Expected elements to be vertically aligned to "${alignment}" but element list had only one element`
+                    `Expected elements to be vertically aligned to "${alignment}" but element list had only one element`,
                 );
             });
 
             horizontalAlignments.forEach((alignment) => {
                 expect(() => expect([]).to.be.horizontallyAligned(alignment)).to.throw(
-                    `Expected elements to be horizontally aligned to "${alignment}" but element list was empty`
+                    `Expected elements to be horizontally aligned to "${alignment}" but element list was empty`,
                 );
                 expect(() => expect([a]).to.be.horizontallyAligned(alignment)).to.throw(
-                    `Expected elements to be horizontally aligned to "${alignment}" but element list had only one element`
+                    `Expected elements to be horizontally aligned to "${alignment}" but element list had only one element`,
                 );
             });
         });
@@ -179,10 +179,10 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).to.be.verticallyAligned('top', 2.0);
 
             expect(() => expect([a, b, c, d]).to.be.verticallyAligned('top')).to.throw(
-                'Expected elements to be vertically aligned to "top" but some weren\'t. ([2])'
+                'Expected elements to be vertically aligned to "top" but some weren\'t. ([2])',
             );
             expect(() => expect([a, b, d]).not.to.be.verticallyAligned('top')).to.throw(
-                'Expected elements not to be vertically aligned to "top" but they were.'
+                'Expected elements not to be vertically aligned to "top" but they were.',
             );
         });
 
@@ -203,10 +203,10 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).to.be.verticallyAligned('center', 2.0);
 
             expect(() => expect([a, b, c, d]).to.be.verticallyAligned('center')).to.throw(
-                'Expected elements to be vertically aligned to "center" but some weren\'t. ([2])'
+                'Expected elements to be vertically aligned to "center" but some weren\'t. ([2])',
             );
             expect(() => expect([a, b, d]).not.to.be.verticallyAligned('center')).to.throw(
-                'Expected elements not to be vertically aligned to "center" but they were.'
+                'Expected elements not to be vertically aligned to "center" but they were.',
             );
         });
 
@@ -224,10 +224,10 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).to.be.verticallyAligned('bottom', 1.0);
 
             expect(() => expect([a, b, c, d]).to.be.verticallyAligned('bottom')).to.throw(
-                'Expected elements to be vertically aligned to "bottom" but some weren\'t. ([2])'
+                'Expected elements to be vertically aligned to "bottom" but some weren\'t. ([2])',
             );
             expect(() => expect([a, b, d]).not.to.be.verticallyAligned('bottom')).to.throw(
-                'Expected elements not to be vertically aligned to "bottom" but they were.'
+                'Expected elements not to be vertically aligned to "bottom" but they were.',
             );
         });
 
@@ -256,10 +256,10 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).to.be.horizontallyAligned('left', 4.0);
 
             expect(() => expect([a, b, c, d]).to.be.horizontallyAligned('left')).to.throw(
-                'Expected elements to be horizontally aligned to "left" but some weren\'t. ([2])'
+                'Expected elements to be horizontally aligned to "left" but some weren\'t. ([2])',
             );
             expect(() => expect([a, b, d]).not.to.be.horizontallyAligned('left')).to.throw(
-                'Expected elements not to be horizontally aligned to "left" but they were.'
+                'Expected elements not to be horizontally aligned to "left" but they were.',
             );
         });
 
@@ -288,10 +288,10 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).to.be.horizontallyAligned('center', 5.0);
 
             expect(() => expect([a, b, c, d]).to.be.horizontallyAligned('center')).to.throw(
-                'Expected elements to be horizontally aligned to "center" but some weren\'t. ([2])'
+                'Expected elements to be horizontally aligned to "center" but some weren\'t. ([2])',
             );
             expect(() => expect([a, b, d]).not.to.be.horizontallyAligned('center')).to.throw(
-                'Expected elements not to be horizontally aligned to "center" but they were.'
+                'Expected elements not to be horizontally aligned to "center" but they were.',
             );
         });
 
@@ -320,10 +320,10 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).to.be.horizontallyAligned('right', 7.0);
 
             expect(() => expect([a, b, c, d]).to.be.horizontallyAligned('right')).to.throw(
-                'Expected elements to be horizontally aligned to "right" but some weren\'t. ([2])'
+                'Expected elements to be horizontally aligned to "right" but some weren\'t. ([2])',
             );
             expect(() => expect([a, b, d]).not.to.be.horizontallyAligned('right')).to.throw(
-                'Expected elements not to be horizontally aligned to "right" but they were.'
+                'Expected elements not to be horizontally aligned to "right" but they were.',
             );
         });
     });
@@ -343,14 +343,14 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).to.be.inHorizontalSequence({ tolerance: 4.0 });
 
             expect(() => expect([a, b, c, d]).to.be.inHorizontalSequence()).to.throw(
-                "Expected elements to form horizontal sequence, but they didn't. (3)"
+                "Expected elements to form horizontal sequence, but they didn't. (3)",
             );
             expect(() => expect([a, b, c]).not.to.be.inHorizontalSequence()).to.throw(
-                'Expected elements not to form horizontal sequence, but they did.'
+                'Expected elements not to form horizontal sequence, but they did.',
             );
 
             expect(() => expect([]).to.be.inHorizontalSequence()).to.throw(
-                'Expected elements to form horizontal sequence, but element list was empty'
+                'Expected elements to form horizontal sequence, but element list was empty',
             );
         });
 
@@ -381,14 +381,14 @@ describe('Layout matchers', function () {
             expect([a, b, c, d]).to.be.inVerticalSequence({ tolerance: 4.0 });
 
             expect(() => expect([a, b, c, d]).to.be.inVerticalSequence()).to.throw(
-                "Expected elements to form vertical sequence, but they didn't. (3)"
+                "Expected elements to form vertical sequence, but they didn't. (3)",
             );
             expect(() => expect([a, b, c]).not.to.be.inVerticalSequence()).to.throw(
-                'Expected elements not to form vertical sequence, but they did.'
+                'Expected elements not to form vertical sequence, but they did.',
             );
 
             expect(() => expect([]).to.be.inVerticalSequence()).to.throw(
-                'Expected elements to form vertical sequence, but element list was empty'
+                'Expected elements to form vertical sequence, but element list was empty',
             );
         });
 

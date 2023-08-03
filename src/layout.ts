@@ -44,7 +44,7 @@ interface EdgeMapItem {
 function findExcludedEdges(edges: number[], range: [number, number]): number[] {
     return edges.reduce<number[]>(
         (acc, edge, index) => (edge >= range[0] && edge <= range[1] ? acc : acc.concat(index)),
-        []
+        [],
     );
 }
 
@@ -53,16 +53,16 @@ function getEdgeMap(edges: number[], tolerance: number): EdgeMapItem[] {
         (acc, edge) =>
             acc.concat(
                 { range: [edge, edge + tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge + tolerance]) },
-                { range: [edge, edge - tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge - tolerance]) }
+                { range: [edge, edge - tolerance], excludedEdges: findExcludedEdges(edges, [edge, edge - tolerance]) },
             ),
-        []
+        [],
     );
 }
 
 function pickLeastExcludedEdges(edgeMap: EdgeMapItem[]): number[] {
     const excludedEdgeItem = edgeMap.reduce<EdgeMapItem | null>(
         (acc, item) => (!acc || item.excludedEdges.length < acc.excludedEdges.length ? item : acc),
-        null
+        null,
     );
     if (excludedEdgeItem) {
         return excludedEdgeItem.excludedEdges;
@@ -107,7 +107,7 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
             isInside(getBoundaries(element), getBoundaries(boundaryElement)),
             "Expected element to be inside of the other, but it wasn't.",
             'Expected element not to be inside of the other, but it was.',
-            true
+            true,
         );
     });
 
@@ -117,7 +117,7 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
             isOutside(getBoundaries(element), getBoundaries(boundaryElement)),
             "Expected element to be outside of the other, but it wasn't.",
             'Expected element not to be outside of the other, but it was.',
-            true
+            true,
         );
     });
 
@@ -127,7 +127,7 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
             getBoundaries(element).width > getBoundaries(comparedTo).width,
             "Expected element to be wider than the other, but it wasn't.",
             'Expected element not to be wider than the other, but it was.',
-            true
+            true,
         );
     });
 
@@ -137,7 +137,7 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
             getBoundaries(element).height > getBoundaries(comparedTo).height,
             "Expected element to be higher than the other, but it wasn't.",
             'Expected element not to be higher than the other, but it was.',
-            true
+            true,
         );
     });
 
@@ -149,7 +149,7 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
             elementRect.width * elementRect.height > comparedRect.width * comparedRect.height,
             "Expected element to be bigger than the other, but it wasn't.",
             'Expected element not to be bigger than the other, but it was.',
-            true
+            true,
         );
     });
 
@@ -157,17 +157,17 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
         this: Chai.AssertionStatic,
         direction: Direction,
         alignment: VerticalAlignment | HorizontalAlignment,
-        tolerance: number
+        tolerance: number,
     ) {
         const elementList = util.flag(this, 'object') as Element[];
 
         if (elementList.length === 0) {
             throw new Error(
-                `Expected elements to be ${direction}ly aligned to "${alignment}" but element list was empty`
+                `Expected elements to be ${direction}ly aligned to "${alignment}" but element list was empty`,
             );
         } else if (elementList.length === 1) {
             throw new Error(
-                `Expected elements to be ${direction}ly aligned to "${alignment}" but element list had only one element`
+                `Expected elements to be ${direction}ly aligned to "${alignment}" but element list had only one element`,
             );
         }
 
@@ -186,11 +186,11 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
         this.assert(
             misaligned.length === 0,
             `Expected elements to be ${direction}ly aligned to "${alignment}" but some weren't. ([${misaligned.join(
-                ', '
+                ', ',
             )}])`,
             `Expected elements not to be ${direction}ly aligned to "${alignment}" but they were.`,
             0,
-            misaligned.length
+            misaligned.length,
         );
     }
 
@@ -202,14 +202,14 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
         'horizontallyAligned',
         function (this: Chai.AssertionStatic, alignment: HorizontalAlignment, tolerance = 0) {
             assertAlignment.call(this, 'horizontal', alignment, tolerance as number);
-        }
+        },
     );
 
     function assertSequence(
         this: Chai.AssertionStatic,
         direction: Direction,
         tolerance?: number,
-        distanceBetween?: number
+        distanceBetween?: number,
     ) {
         const elementList = util.flag(this, 'object') as Element[];
 
@@ -225,7 +225,7 @@ export default function use(chai: Chai.ChaiStatic, util: Chai.ChaiUtils): void {
             `Expected elements to form ${direction} sequence, but they didn't. (${lastElementOfSequence})`,
             `Expected elements not to form ${direction} sequence, but they did.`,
             elementList.length,
-            lastElementOfSequence
+            lastElementOfSequence,
         );
     }
 
