@@ -43,7 +43,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-no-only-tests": "^3.1.0",
     "mocha": "^10.2.0",
-    "mocha-play": "^6.0.2",
+    "mocha-play": "^7.0.1",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",
     "typescript": "~5.2.2",
