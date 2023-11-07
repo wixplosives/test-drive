@@ -33,7 +33,7 @@
     "@types/chai": "^4.3.9",
     "@types/chai-as-promised": "^7.1.7",
     "@types/chai-dom": "^1.11.2",
-    "@types/chai-style": "^1.0.1",
+    "@types/chai-style": "^1.0.2",
     "@types/dom-matches": "^2.0.1",
     "@types/mocha": "^10.0.3",
     "@types/sinon": "^17.0.0",
