@@ -30,7 +30,7 @@
   "devDependencies": {
     "@playwright/browser-chromium": "^1.39.0",
     "@ts-tools/webpack-loader": "^5.0.2",
-    "@types/chai": "^4.3.9",
+    "@types/chai": "^4.3.10",
     "@types/chai-as-promised": "^7.1.7",
     "@types/chai-dom": "^1.11.2",
     "@types/chai-style": "^1.0.1",
