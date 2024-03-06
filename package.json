@@ -46,7 +46,7 @@
     "mocha-play": "^7.0.4",
     "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
-    "typescript": "~5.3.3",
+    "typescript": "~5.4.2",
     "webpack": "^5.90.3"
   },
   "files": [
