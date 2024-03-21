@@ -12,7 +12,7 @@
     "build:cjs": "tsc -p tsconfig.build.json --outDir cjs --module commonjs",
     "build:esm": "tsc -p tsconfig.build.json --outDir esm --module esnext",
     "pretest": "npm run typecheck && npm run lint",
-    "test": "mocha-play \"./test/**/*.spec.ts\"",
+    "test": "mocha-web \"./test/**/*.spec.ts\"",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "prepack": "npm run build"
@@ -29,7 +29,6 @@
   },
   "devDependencies": {
     "@playwright/browser-chromium": "^1.42.1",
-    "@ts-tools/webpack-loader": "^5.0.2",
     "@types/chai": "^4.3.14",
     "@types/chai-as-promised": "^7.1.8",
     "@types/chai-dom": "^1.11.3",
@@ -39,15 +38,15 @@
     "@types/sinon": "^17.0.3",
     "@types/sinon-chai": "^3.2.12",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "esbuild": "^0.20.2",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-no-only-tests": "^3.1.0",
     "mocha": "^10.3.0",
-    "mocha-play": "^7.0.4",
+    "mocha-web": "^1.0.0",
     "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
-    "typescript": "~5.4.3",
-    "webpack": "^5.91.0"
+    "typescript": "~5.4.3"
   },
   "files": [
     "cjs",
