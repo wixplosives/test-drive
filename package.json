@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "chai": "^4.4.1",
-    "chai-as-promised": "^7.1.1",
+    "chai-as-promised": "^7.1.2",
     "chai-dom": "^1.12.0",
     "chai-style": "^1.0.3",
     "dom-matches": "^2.0.0",
