@@ -24,7 +24,7 @@
     "chai-style": "^1.0.3",
     "dom-matches": "^2.0.0",
     "promise-assist": "^2.0.1",
-    "sinon": "^17.0.2",
+    "sinon": "^17.0.1",
     "sinon-chai": "^3.7.0"
   },
   "devDependencies": {
@@ -37,7 +37,7 @@
     "@types/mocha": "^10.0.6",
     "@types/sinon": "^17.0.3",
     "@types/sinon-chai": "^3.2.12",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/eslint-plugin": "^7.9.0",
     "esbuild": "^0.21.2",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
