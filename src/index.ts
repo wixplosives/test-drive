@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
-/// <reference path="../matchers.d.ts" />
+/// <reference path="../matchers.d.ts" preserve="true" />
 
 import sinon from 'sinon';
 import chai from 'chai';
