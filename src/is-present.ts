@@ -7,14 +7,14 @@ function isPresent(element: unknown): boolean {
     );
 }
 
-export default function (chai: Chai.ChaiStatic, { flag }: Chai.ChaiUtils): void {
+export default function (chai: Chai.ChaiStatic, utils: Chai.ChaiUtils): void {
     chai.Assertion.addMethod('present', function () {
-        const element = flag(this, 'object') as Element;
+        const element = utils.flag(this, 'object') as Element;
         this.assert(isPresent(element), 'Element expected to be present.', 'Element expected to be absent.', true);
     });
 
     chai.Assertion.addMethod('absent', function () {
-        const element = flag(this, 'object') as Element;
+        const element = utils.flag(this, 'object') as Element;
         this.assert(!isPresent(element), 'Element expected to be absent.', 'Element expected to be present.', true);
     });
 }
