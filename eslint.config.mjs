@@ -6,7 +6,7 @@ import pluginTypescript from 'typescript-eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  { ignores: ['**/dist/', '**/*.{js,mjs,cjs}'] },
+  { ignores: ['dist/', 'cjs/', 'esm/', '**/*.{js,mjs,cjs}'] },
   pluginJs.configs.recommended,
 
   ...pluginTypescript.configs.recommendedTypeChecked,
