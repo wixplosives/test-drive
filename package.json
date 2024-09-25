@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@playwright/browser-chromium": "^1.47.2",
-    "@types/chai": "^4.3.19",
+    "@types/chai": "^4.3.20",
     "@types/chai-as-promised": "^7.1.8",
     "@types/chai-dom": "^1.11.3",
     "@types/chai-style": "^1.0.2",
