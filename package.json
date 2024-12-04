@@ -43,7 +43,7 @@
     "eslint-plugin-no-only-tests": "^3.3.0",
     "mocha": "^11.0.1",
     "mocha-web": "^2.0.0",
-    "prettier": "^3.4.1",
+    "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.17.0"
