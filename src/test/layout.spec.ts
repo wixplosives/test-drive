@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
 
-import { expect, getLayoutFixture, detectMisalignment } from '../src';
+import { expect, getLayoutFixture, detectMisalignment } from '../index.js';
 
 describe('Layout matchers', function () {
     describe('detect placement', function () {

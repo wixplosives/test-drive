@@ -1,4 +1,4 @@
-import { selectDom, expect } from '../src';
+import { selectDom, expect } from '../index.js';
 
 function textContent(element: Element | null) {
     return element && element.textContent;

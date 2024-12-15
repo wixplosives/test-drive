@@ -1,4 +1,4 @@
-import { isElement } from './helpers';
+import { isElement } from './helpers.js';
 
 interface Point {
     x: number;

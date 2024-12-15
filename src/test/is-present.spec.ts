@@ -1,4 +1,4 @@
-import { expect } from '../src';
+import { expect } from '../index.js';
 
 describe('isPresent() matcher detects', function () {
     this.timeout(5_000);
