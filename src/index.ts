@@ -2,13 +2,13 @@
 /// <reference path="../matchers.d.ts" preserve="true" />
 
 import sinon from 'sinon';
-import chai from 'chai';
+import * as chai from 'chai';
 import chaiDom from 'chai-dom';
-import isPresent from './is-present';
+import isPresent from './is-present.js';
 import chaiAsPromised from 'chai-as-promised';
 import chaiStyle from 'chai-style';
 import sinonChai from 'sinon-chai';
-import layout from './layout';
+import layout from './layout.js';
 
 export * from 'promise-assist';
 
@@ -24,9 +24,9 @@ if (typeof window !== 'undefined') {
 
 const expect: Chai.ExpectStatic = Object.assign(chai.expect.bind(chai), chai.expect);
 
-export * from './helpers';
-export * from './layout';
-export * from './layout-driver';
-export * from './select-dom';
+export * from './helpers.js';
+export * from './layout.js';
+export * from './layout-driver.js';
+export * from './select-dom.js';
 
 export { chai, sinon, expect, layout };

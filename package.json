@@ -1,44 +1,44 @@
 {
   "name": "test-drive",
   "version": "1.6.0",
+  "type": "module",
   "description": "Opinionated library for writing web component tests",
-  "main": "./cjs/index.js",
-  "module": "./esm/index.js",
-  "types": "./esm/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "clean": "rimraf ./cjs ./esm",
+    "clean": "rimraf ./dist",
     "prebuild": "npm run clean",
-    "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc -p tsconfig.build.json --outDir cjs --module commonjs",
-    "build:esm": "tsc -p tsconfig.build.json --outDir esm --module esnext",
+    "build": "tsc",
     "pretest": "npm run typecheck && npm run lint",
-    "test": "mocha-web \"./test/**/*.spec.ts\"",
+    "test": "mocha-web \"./src/test/**/*.spec.ts\"",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "prepack": "npm run build"
   },
   "dependencies": {
-    "chai": "^4.5.0",
-    "chai-as-promised": "^7.1.2",
+    "chai": "^5.1.2",
+    "chai-as-promised": "^8.0.1",
     "chai-dom": "^1.12.0",
     "chai-style": "^1.0.3",
     "dom-matches": "^2.0.0",
     "promise-assist": "^2.0.1",
     "sinon": "^19.0.2",
-    "sinon-chai": "^3.7.0"
+    "sinon-chai": "^4.0.0"
   },
   "devDependencies": {
     "@playwright/browser-chromium": "^1.49.1",
-    "@types/chai": "^4.3.20",
-    "@types/chai-as-promised": "^7.1.8",
+    "@types/chai": "^5.0.1",
+    "@types/chai-as-promised": "^8.0.1",
     "@types/chai-dom": "^1.11.3",
     "@types/chai-style": "^1.0.2",
     "@types/dom-matches": "^2.0.2",
     "@types/mocha": "^10.0.10",
     "@types/sinon": "^17.0.3",
-    "@types/sinon-chai": "^3.2.12",
+    "@types/sinon-chai": "^4.0.0",
     "esbuild": "^0.24.0",
-    "eslint": "^9.16.0",
+    "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-no-only-tests": "^3.3.0",
     "mocha": "^11.0.1",
@@ -49,10 +49,10 @@
     "typescript-eslint": "^8.18.0"
   },
   "files": [
-    "cjs",
-    "esm",
+    "dist",
     "src",
-    "matchers.d.ts"
+    "matchers.d.ts",
+    "!*/test"
   ],
   "repository": {
     "type": "git",
