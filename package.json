@@ -1,6 +1,6 @@
 {
   "name": "test-drive",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "type": "module",
   "description": "Opinionated library for writing web component tests",
   "exports": {
