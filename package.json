@@ -28,7 +28,7 @@
     "sinon-chai": "^4.0.0"
   },
   "devDependencies": {
-    "@playwright/browser-chromium": "^1.50.1",
+    "@playwright/browser-chromium": "^1.51.0",
     "@types/chai": "^5.0.1",
     "@types/chai-as-promised": "^8.0.1",
     "@types/chai-dom": "^1.11.3",
