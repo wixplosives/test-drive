@@ -28,25 +28,25 @@
     "sinon-chai": "^4.0.0"
   },
   "devDependencies": {
-    "@playwright/browser-chromium": "^1.50.1",
-    "@types/chai": "^5.0.1",
-    "@types/chai-as-promised": "^8.0.1",
+    "@playwright/browser-chromium": "^1.51.0",
+    "@types/chai": "^5.2.0",
+    "@types/chai-as-promised": "^8.0.2",
     "@types/chai-dom": "^1.11.3",
     "@types/chai-style": "^1.0.2",
     "@types/dom-matches": "^2.0.2",
     "@types/mocha": "^10.0.10",
     "@types/sinon": "^17.0.4",
     "@types/sinon-chai": "^4.0.0",
-    "esbuild": "^0.25.0",
-    "eslint": "^9.21.0",
-    "eslint-config-prettier": "^10.0.2",
+    "esbuild": "^0.25.1",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-no-only-tests": "^3.3.0",
     "mocha": "^11.1.0",
     "mocha-web": "^2.0.1",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "typescript": "~5.8.2",
-    "typescript-eslint": "^8.26.0"
+    "typescript-eslint": "^8.26.1"
   },
   "files": [
     "dist",
