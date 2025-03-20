@@ -24,7 +24,7 @@
     "chai-style": "^1.0.3",
     "dom-matches": "^2.0.0",
     "promise-assist": "^2.0.1",
-    "sinon": "^19.0.2",
+    "sinon": "^19.0.4",
     "sinon-chai": "^4.0.0"
   },
   "devDependencies": {
